@@ -108,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        //updateUI(currentUser)
+        updateUI(currentUser)
 
 //        if (currentUser != null) {
 //            signInBtn.visibility = View.GONE
