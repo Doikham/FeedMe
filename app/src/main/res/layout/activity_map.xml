@@ -6,4 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Location"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <Button
+        android:id="@+id/currentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Location"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <TextView
+        android:id="@+id/currentLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Location"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="205dp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="269dp"
+        android:layout_height="152dp"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="339dp" />
+
 </android.support.constraint.ConstraintLayout>

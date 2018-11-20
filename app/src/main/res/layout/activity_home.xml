@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="200dp"
+        android:layout_height="41dp"
+        android:text="SHAKE"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="188dp"
+        android:layout_height="41dp"
+        android:text="Nearby'"
+        tools:layout_editor_absoluteX="199dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="370dp"
+        android:layout_height="233dp"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="104dp">
+
+    </android.support.v7.widget.GridLayout>
 </android.support.constraint.ConstraintLayout>
