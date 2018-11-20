@@ -1,5 +1,6 @@
 package com.egci428.feedme
 
+import android.app.ActivityManager
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_test.*
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInApi
 
 
 private lateinit var auth: FirebaseAuth
@@ -38,18 +41,19 @@ class TestActivity : AppCompatActivity() {
 
         }
 
-//        auth.addAuthStateListener {
-//
-//        }
+
 
         signoutBtn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            Toast.makeText(this, "Signing Out", Toast.LENGTH_LONG).show()
-            val intentso = Intent(this, LoginActivity::class.java )
-            startActivity(intentso)
-            finish()
-
+            auth.signOut()
+            val user = auth.currentUser
+            Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show()
+            if(user == null) {
+                val intentso = Intent(this, LoginActivity::class.java)
+                startActivity(intentso)
+//                val delete = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+//                delete.clearApplicationUserData()
+                finish()
+            }
         }
 
 

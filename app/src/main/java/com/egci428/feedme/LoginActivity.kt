@@ -53,7 +53,10 @@ class LoginActivity : AppCompatActivity() {
         signInBtn.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
+            mGoogleSignInClient.signOut()
         }
+
+
 
 
 
