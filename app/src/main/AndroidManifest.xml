@@ -21,9 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".TestActivity" />
-
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".ListRestaurant" />
+        <activity android:name=".ListNear" />
+        <activity android:name=".RestaurantActivity" />
+        <activity android:name=".ItemActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".ReceiptActivity"></activity>
     </application>
 
 </manifest>
