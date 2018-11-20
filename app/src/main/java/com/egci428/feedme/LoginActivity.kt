@@ -122,13 +122,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(completedTask: FirebaseUser?) {
         try {
-            //val account = completedTask.getResult(ApiException::class.java)
 
-            // Signed in successfully, show authenticated UI.
-
-            val intent = Intent(this, TestActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(completedTask != null) {
+                val intent = Intent(this, TestActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
