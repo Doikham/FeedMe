@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         signInBtn.setSize(SignInButton.SIZE_STANDARD)
+        signInBtn.setColorScheme(SignInButton.COLOR_AUTO)
         signInBtn.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
