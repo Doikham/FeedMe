@@ -40,12 +40,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="162dp">
 
-        <Button
-            android:id="@+id/alrSignInBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Click to continue"
-            android:visibility="gone" />
     </com.google.android.gms.common.SignInButton>
 
     <TextView

@@ -37,15 +37,7 @@ class LoginActivity : AppCompatActivity() {
 // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        val currentUser = auth.currentUser
 
-        //updateUI(currentUser)
-
-        if (currentUser != null) {
-            signInBtn.visibility = View.GONE
-            alrSignInBtn.visibility = View.VISIBLE
-
-        }
 
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -63,9 +55,6 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        alrSignInBtn.setOnClickListener {
-            updateUI(auth.currentUser)
-        }
 
 
     }
@@ -118,6 +107,14 @@ class LoginActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        //updateUI(currentUser)
+
+//        if (currentUser != null) {
+//            signInBtn.visibility = View.GONE
+//            alrSignInBtn.visibility = View.VISIBLE
+//
+//        }
 
 
     }
@@ -129,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Signed in successfully, show authenticated UI.
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, TestActivity::class.java)
             startActivity(intent)
             finish()
         } catch (e: ApiException) {
