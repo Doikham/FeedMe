@@ -21,6 +21,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.kevalpatel2106.fingerprintdialog.AuthenticationCallback
+import com.kevalpatel2106.fingerprintdialog.FingerprintDialogBuilder
 
 
 const val RC_SIGN_IN = 123
@@ -56,7 +58,6 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
             mGoogleSignInClient.signOut()
         }
-
 
 
 
@@ -112,13 +113,57 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+        //Need to change if condition to check if setting for fingerprint scanner is true
+        if(currentUser != null) {
+            val dialogBuilder = FingerprintDialogBuilder(this)
+                    .setTitle("Authentication Required")
+                    .setSubtitle("We need to make sure it is really you")
+                    .setDescription("Do tour thang ")
+                    .setNegativeButton("Cancel")
 
-//        if (currentUser != null) {
-//            signInBtn.visibility = View.GONE
-//            alrSignInBtn.visibility = View.VISIBLE
-//
-//        }
+            val callback = object : AuthenticationCallback {
+
+                override fun fingerprintAuthenticationNotSupported() {
+                    // Device doesn't support fingerprint authentication. May be device doesn't have fingerprint hardware or device is running on Android below Marshmallow.
+                    // Switch to alternate authentication method.
+                }
+
+                override fun hasNoFingerprintEnrolled() {
+                    // User has no fingerprint enrolled.
+                    // Application should redirect the user to the lock screen settings.
+                    // FingerprintUtils.openSecuritySettings(this@SecureActivity)
+                }
+
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
+                    // Unrecoverable error. Cannot use fingerprint scanner. Library will stop scanning for the fingerprint after this callback.
+                    // Switch to alternate authentication method.
+                }
+
+                override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence?) {
+                    // Authentication process has some warning. such as "Sensor dirty, please clean it."
+                    // Handle it if you want. Library will continue scanning for the fingerprint after this callback.
+                }
+
+                override fun authenticationCanceledByUser() {
+                    // User canceled the authentication by tapping on the cancel button (which is at the bottom of the dialog).
+                }
+
+                override fun onAuthenticationSucceeded() {
+                    // Authentication success
+                    // Your user is now authenticated.
+                    updateUI(currentUser)
+                }
+
+                override fun onAuthenticationFailed() {
+                    // Authentication failed.
+                    // Library will continue scanning the fingerprint after this callback.
+                }
+            }
+
+            dialogBuilder.show(supportFragmentManager, callback)
+
+        }
+
 
 
     }

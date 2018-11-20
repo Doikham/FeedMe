@@ -9,15 +9,6 @@
     android:fitsSystemWindows="true">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/ic_logo" />
-
     <!-- Email Label -->
 
     <!-- Password Label -->
@@ -53,6 +44,15 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        app:srcCompat="@drawable/ic_logo_circle" />
 
 
 </RelativeLayout>
