@@ -5,6 +5,7 @@
     android:id="@+id/scrollView2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/colorBG"
     android:fitsSystemWindows="true">
 
 
@@ -25,9 +26,7 @@
         android:id="@+id/FeedMeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="259dp"
+        android:layout_centerInParent="true"
         android:text="FEED ME"
         android:textAlignment="center"
         android:textSize="30sp" />
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="162dp">
+        android:layout_marginBottom="221dp">
 
     </com.google.android.gms.common.SignInButton>
 
