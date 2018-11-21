@@ -25,4 +25,10 @@
     <string name="no_fingerprint_configured">No Fingerprint Configured</string>
     <string name="secure_lock_not_enabled">Not enabled</string>
 
+    <string name="setting">Setting</string>
+    <string name="history">History</string>
+    <string name="schedule">Schedule</string>
+
+    <string name="username">username</string>
+
 </resources>
