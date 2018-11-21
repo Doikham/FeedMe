@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kevalpatel2106.fingerprintdialog.AuthenticationCallback
 import com.kevalpatel2106.fingerprintdialog.FingerprintDialogBuilder
+import com.kevalpatel2106.fingerprintdialog.FingerprintUtils
 import com.lmntrx.android.library.livin.missme.ProgressDialog
 
 
@@ -86,15 +87,7 @@ class LoginActivity : AppCompatActivity() {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val progressDialog = ProgressDialog(this)
-            // Set message
-            progressDialog.setMessage("Signing In")
 
-            // Set cancelable
-            progressDialog.setCancelable(false)
-
-            // Show dialog
-            progressDialog.show()
 
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -119,6 +112,16 @@ class LoginActivity : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
                         // Log.d(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
+                        val progressDialog = ProgressDialog(this)
+                        // Set message
+                        progressDialog.setMessage("Signing In")
+
+                        // Set cancelable
+                        progressDialog.setCancelable(false)
+
+
+                        // Show dialog
+                        progressDialog.show()
 
                         updateUI(user)
                     } else {
@@ -133,6 +136,7 @@ class LoginActivity : AppCompatActivity() {
                 }
     }
 
+
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -142,25 +146,31 @@ class LoginActivity : AppCompatActivity() {
             val dialogBuilder = FingerprintDialogBuilder(this)
                     .setTitle("Authentication Required")
                     .setSubtitle("We need to make sure it is really you")
-                    .setDescription("Do your thang ")
-                    .setNegativeButton("Cancel")
+                    .setDescription("Place your finger on your fingerprint sensor")
+                    .setNegativeButton("Use Pin Instead")
 
             val callback = object : AuthenticationCallback {
 
                 override fun fingerprintAuthenticationNotSupported() {
                     // Device doesn't support fingerprint authentication. May be device doesn't have fingerprint hardware or device is running on Android below Marshmallow.
                     // Switch to alternate authentication method.
+                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun hasNoFingerprintEnrolled() {
                     // User has no fingerprint enrolled.
                     // Application should redirect the user to the lock screen settings.
-                    // FingerprintUtils.openSecuritySettings(this@SecureActivity)
+                    FingerprintUtils.openSecuritySettings(this@LoginActivity)
                 }
 
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                     // Unrecoverable error. Cannot use fingerprint scanner. Library will stop scanning for the fingerprint after this callback.
                     // Switch to alternate authentication method.
+                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence?) {
@@ -170,6 +180,9 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun authenticationCanceledByUser() {
                     // User canceled the authentication by tapping on the cancel button (which is at the bottom of the dialog).
+                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onAuthenticationSucceeded() {
@@ -185,6 +198,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             dialogBuilder.show(supportFragmentManager, callback)
+
 
         }
 
