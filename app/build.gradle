@@ -42,4 +42,5 @@ android {
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:+'
     implementation 'com.kevalpatel2106:fingerprint-dialog-compat:1.0'
+    compile 'com.lmntrx.android.library.livin.missme:missme:0.1.5'
 }

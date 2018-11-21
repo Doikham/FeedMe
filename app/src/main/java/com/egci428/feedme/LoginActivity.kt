@@ -13,7 +13,10 @@ import android.content.Intent
 import android.nfc.Tag
 import android.os.SystemClock.sleep
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
+import android.support.v7.widget.DialogTitle
 import android.util.Log
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
@@ -23,10 +26,15 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kevalpatel2106.fingerprintdialog.AuthenticationCallback
 import com.kevalpatel2106.fingerprintdialog.FingerprintDialogBuilder
+import com.lmntrx.android.library.livin.missme.ProgressDialog
 
 
 const val RC_SIGN_IN = 123
 private lateinit var auth: FirebaseAuth
+
+
+
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -51,12 +59,18 @@ class LoginActivity : AppCompatActivity() {
         // Build a GoogleSignInClient with the options specified by gso.
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
+
+
+
+
         signInBtn.setSize(SignInButton.SIZE_STANDARD)
         signInBtn.setColorScheme(SignInButton.COLOR_AUTO)
         signInBtn.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
             mGoogleSignInClient.signOut()
+
+
         }
 
 
@@ -72,7 +86,16 @@ class LoginActivity : AppCompatActivity() {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            //handleSignInResult(task)
+            val progressDialog = ProgressDialog(this)
+            // Set message
+            progressDialog.setMessage("Signing In")
+
+            // Set cancelable
+            progressDialog.setCancelable(false)
+
+            // Show dialog
+            progressDialog.show()
+
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
@@ -96,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
                         // Log.d(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
+
                         updateUI(user)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -118,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
             val dialogBuilder = FingerprintDialogBuilder(this)
                     .setTitle("Authentication Required")
                     .setSubtitle("We need to make sure it is really you")
-                    .setDescription("Do tour thang ")
+                    .setDescription("Do your thang ")
                     .setNegativeButton("Cancel")
 
             val callback = object : AuthenticationCallback {
@@ -186,6 +210,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
 
 }
 

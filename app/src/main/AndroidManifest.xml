@@ -19,7 +19,8 @@
         android:roundIcon="@drawable/ic_logo_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InitialDisplayActivity"
+        <activity
+            android:name=".InitialDisplayActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"
-        />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".TestActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SettingActivity" />
@@ -40,7 +41,7 @@
         <activity android:name=".ItemActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".ReceiptActivity" />
-
+        <activity android:name=".PinActivity"></activity>
     </application>
 
 </manifest>
