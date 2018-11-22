@@ -25,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_menu)
+            setLogo(R.drawable.ic_logo_circle)
         }
 
 
