@@ -143,68 +143,17 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         //Need to change if condition to check if setting for fingerprint scanner is true
         if(currentUser != null) {
-            val dialogBuilder = FingerprintDialogBuilder(this)
-                    .setTitle("Authentication Required")
-                    .setSubtitle("We need to make sure it is really you")
-                    .setDescription("Place your finger on your fingerprint sensor")
-                    .setNegativeButton("Use Pin Instead")
-
-            val callback = object : AuthenticationCallback {
-
-                override fun fingerprintAuthenticationNotSupported() {
-                    // Device doesn't support fingerprint authentication. May be device doesn't have fingerprint hardware or device is running on Android below Marshmallow.
-                    // Switch to alternate authentication method.
-                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
-                override fun hasNoFingerprintEnrolled() {
-                    // User has no fingerprint enrolled.
-                    // Application should redirect the user to the lock screen settings.
-                    FingerprintUtils.openSecuritySettings(this@LoginActivity)
-                }
-
-                override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
-                    // Unrecoverable error. Cannot use fingerprint scanner. Library will stop scanning for the fingerprint after this callback.
-                    // Switch to alternate authentication method.
-                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
-                override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence?) {
-                    // Authentication process has some warning. such as "Sensor dirty, please clean it."
-                    // Handle it if you want. Library will continue scanning for the fingerprint after this callback.
-                }
-
-                override fun authenticationCanceledByUser() {
-                    // User canceled the authentication by tapping on the cancel button (which is at the bottom of the dialog).
-                    val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
-                override fun onAuthenticationSucceeded() {
-                    // Authentication success
-                    // Your user is now authenticated.
-                    updateUI(currentUser)
-                }
-
-                override fun onAuthenticationFailed() {
-                    // Authentication failed.
-                    // Library will continue scanning the fingerprint after this callback.
-                }
+            val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
+            startActivity(intent)
+            finish()
             }
 
-            dialogBuilder.show(supportFragmentManager, callback)
+
 
 
         }
 
 
-
-    }
 
 
     private fun updateUI(completedTask: FirebaseUser?) {

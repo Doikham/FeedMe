@@ -41,8 +41,8 @@
         <activity android:name=".ItemActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".ReceiptActivity" />
-        <activity android:name=".PasscodeViewActivity">
-
+        <activity android:name=".PasscodeViewActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
