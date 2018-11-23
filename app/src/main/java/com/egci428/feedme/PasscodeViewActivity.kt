@@ -10,7 +10,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.kevalpatel2106.fingerprintdialog.AuthenticationCallback
 import com.kevalpatel2106.fingerprintdialog.FingerprintDialogBuilder
 import com.kevalpatel2106.fingerprintdialog.FingerprintUtils
+import kotlinx.android.synthetic.main.activity_passcode_view.passcodeView
 
+
+var count: Int = 5
 
 class PasscodeViewActivity : AppCompatActivity() {
 
@@ -21,6 +24,7 @@ class PasscodeViewActivity : AppCompatActivity() {
         passcodeView
                 .setLocalPasscode("5555")
                 .setListener(passcodeListener)
+                .wrongInputTip = "  $count times remaining. App will automatically sign out after $count tries"
 
         val dialogBuilder = FingerprintDialogBuilder(this)
                 .setTitle("Authentication Required")
@@ -32,7 +36,7 @@ class PasscodeViewActivity : AppCompatActivity() {
     }
 
     private val passcodeListener = object : PasscodeView.PasscodeViewListener {
-        var count: Int = 5
+
         override fun onSuccess(number: String) {
             updateUI()
         }
@@ -41,8 +45,8 @@ class PasscodeViewActivity : AppCompatActivity() {
             if (count == 0) {
 
                 FirebaseAuth.getInstance().signOut()
-            } else {
-                passcodeView.wrongInputTip = "  $count times remaining. App will automatically sign out after $count tries"
+            }
+            else {
                 count.dec()
             }
         }
@@ -93,7 +97,7 @@ class PasscodeViewActivity : AppCompatActivity() {
 
     private fun updateUI(){
 
-        val intent = Intent(this@PasscodeViewActivity, HomeActivity::class.java)
+        val intent = Intent(this@PasscodeViewActivity, TestActivity::class.java)
         startActivity(intent)
         finish()
 
