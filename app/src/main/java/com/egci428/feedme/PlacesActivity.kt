@@ -42,19 +42,48 @@ class PlacesActivity : FragmentActivity() {
         }
         else {
             val restaurantnum = 79
+            val cafenum = 15
+            val delnum = 60
+            val tanum = 61
             val placeResult = mPlaceDetectionClient.getCurrentPlace(null)
             placeResult.addOnCompleteListener { task ->
                 val likelyPlaces = task.result
                 for (placeLikelihood in likelyPlaces) {
-                    if(placeLikelihood.place.placeTypes.contains(restaurantnum)) {
+                    if(placeLikelihood.place.placeTypes.contains(restaurantnum)){
+                    Log.i("YO1", String.format("Place '%s' is type '%s' has likelihood: %g",
+                            placeLikelihood.place.name,
+                            "Restaurant",
+                            placeLikelihood.likelihood))
+                    }
+
+                    if(placeLikelihood.place.placeTypes.contains(cafenum)){
                         Log.i("YO1", String.format("Place '%s' is type '%s' has likelihood: %g",
                                 placeLikelihood.place.name,
-                                "Restaurant",
+                                "Cafe",
+                                placeLikelihood.likelihood))
+                    }
+
+                    if(placeLikelihood.place.placeTypes.contains(delnum)){
+                        Log.i("YO1", String.format("Place '%s' is type '%s' has likelihood: %g",
+                                placeLikelihood.place.name,
+                                "Delivery",
+                                placeLikelihood.likelihood))
+                    }
+
+                    if(placeLikelihood.place.placeTypes.contains(tanum)){
+                        Log.i("YO1", String.format("Place '%s' is type '%s' has likelihood: %g",
+                                placeLikelihood.place.name,
+                                "Takeaway",
                                 placeLikelihood.likelihood))
                     }
                 }
                 likelyPlaces.release()
             }
+
+
+
+
+
         }
 
 
