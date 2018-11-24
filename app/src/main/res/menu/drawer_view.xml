@@ -3,15 +3,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/settingDraw"
-            android:icon="@drawable/ic_logo"
+            android:icon="@drawable/ic_settings"
             android:title="@string/setting" />
         <item
             android:id="@+id/historyDraw"
-            android:icon="@drawable/ic_logo"
+            android:icon="@drawable/ic_history"
             android:title="@string/history" />
         <item
             android:id="@+id/scheduleDraw"
-            android:icon="@drawable/ic_logo"
+            android:icon="@drawable/ic_schedule"
             android:title="@string/schedule" />
     </group>
 </menu>

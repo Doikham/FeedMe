@@ -21,7 +21,7 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="496dp"
+            android:layout_height="510dp"
             android:layout_marginTop="55dp"
             android:fillViewport="true">
 
@@ -34,39 +34,51 @@
 
                 <Button
                     android:id="@+id/shakeBtn"
-                    android:layout_width="0dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+
+                    android:layout_marginStart="8dp"
                     android:elevation="0dp"
                     android:text="SHAKE"
-                    app:layout_constraintEnd_toStartOf="@+id/nearbyBtn"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/nearbyBtn"
                     tools:layout_conversion_absoluteHeight="41dp"
                     tools:layout_conversion_absoluteWidth="192dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    tools:layout_editor_absoluteY="8dp" />
 
                 <Button
                     android:id="@+id/nearbyBtn"
-                    android:layout_width="0dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:text="Nearby"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shakeBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/shakeBtn"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:layout_conversion_absoluteHeight="41dp"
                     tools:layout_conversion_absoluteWidth="192dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    tools:layout_editor_absoluteY="8dp" />
 
                 <ListView
                     android:id="@+id/recRes"
                     android:layout_width="368dp"
                     android:layout_height="132dp"
                     tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="56dp" />
+                    tools:layout_editor_absoluteY="64dp" />
 
                 <android.support.v7.widget.GridLayout
                     android:layout_width="368dp"
                     android:layout_height="307dp"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="196dp">
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recRes">
 
                     <ListView
                         android:id="@+id/categoriesList"
@@ -85,7 +97,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_view" >
+        app:menu="@menu/drawer_view">
 
     </android.support.design.widget.NavigationView>
 
