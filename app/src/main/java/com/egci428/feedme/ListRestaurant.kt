@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.PlaceDetectionClient
 import com.google.android.gms.location.places.Places
@@ -29,7 +30,7 @@ class ListRestaurant : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
 
-        var choice: Int = 0
+        var choice: Int = 1
 
         var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
@@ -52,42 +53,36 @@ class ListRestaurant : AppCompatActivity()  {
 
             placeResult.addOnCompleteListener { task ->
                 val likelyPlaces = task.result
-                if(choice == 1){
+                /*if(choice == 1){
                 for (placeLikelihood in likelyPlaces) {
                     if (placeLikelihood.place.placeTypes.contains(restaurantnum)) {
                         Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng)
+                        //Toast.makeText(this,placeLikelihood.place.name.toString(),Toast.LENGTH_SHORT).show()
+
                     }
                 }
-
-
-                }
+                }*/
                 likelyPlaces.release()
             }
 
-
-
-
-
         }
-
-
         //put list here; data = list.getData()
         data = Dataprovider.getData()
+
         val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
         listr.adapter = restaurantArrayAdapter
-        listr.setOnItemClickListener { adapterView, view, position, ->
+        listr.setOnItemClickListener { adapterView, view, position, _ ->
             val restaurant = data!!.get(position)
-            displayDetail(restaurant,position)
+            displayDetail(restaurant)
         }
     }
 
     private fun displayDetail(restaurant: Restaurant){
         val intent = Intent(this,RestaurantActivity::class.java)
         intent.putExtra("rname",restaurant.name)
-        intent.putExtra("rdes",restaurant.description)
     }
 
-    private class RestaurantArrayAdapter(var context: Context, var resource: Int, var objects: ArrayList<Restaurant>) : BaseAdapter(){
+    private class RestaurantArrayAdapter(var context: Context, var resource: Int, var objects: ArrayList<Restaurant>) : BaseAdapter() {
 
         override fun getCount(): Int {
             return objects.size
@@ -105,22 +100,23 @@ class ListRestaurant : AppCompatActivity()  {
             val restaurant = objects[position]
             val view: View
 
-            if (convertView==null){
+            if (convertView == null) {
                 val layoutInflater = LayoutInflater.from(parent!!.context)
                 view = layoutInflater.inflate(R.layout.restaurant_item, parent, false)
-                val viewHolder = ViewHolder(view.resListDes, view.ResListName, view.resListImg)
+                val viewHolder = ViewHolder(view.ResListName)
                 view.tag = viewHolder
-            } else{
+            } else {
                 view = convertView
             }
             val viewHolder = view.tag as ViewHolder
             viewHolder.restaurantName.text = restaurant.name
-            viewHolder.restaurantDes.text = restaurant.description
+            //Toast.makeText(context,"IN"+restaurant.name.toString(),Toast.LENGTH_SHORT).show()
             //val res = context.resources.getIdentifier()
             //Upper line sets res as a place where we use image
             //viewHolder.restaurantImg.setImageResource(res)
             //Upper line sets viewHolder to store image
+            return view
         }
-        private class ViewHolder(val restaurantName: TextView, val restaurantDes: TextView, val restaurantImg: ImageView)
+        private class ViewHolder(val restaurantName: TextView)
     }
 }
