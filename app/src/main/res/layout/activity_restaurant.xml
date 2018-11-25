@@ -16,51 +16,66 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ImageView
-        android:id="@+id/resImg"
-        android:layout_width="113dp"
-        android:layout_height="102dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="77dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="492dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbRes">
 
-    <TextView
-        android:id="@+id/resName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Restaurant Name"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="200dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
-    <TextView
-        android:id="@+id/resDres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="238dp" />
+        <ImageView
+            android:id="@+id/resImg"
+            android:layout_width="113dp"
+            android:layout_height="102dp"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="77dp" />
 
-    <ListView
-        android:id="@+id/listRecItem"
-        android:layout_width="220dp"
-        android:layout_height="171dp"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="288dp" />
+        <TextView
+            android:id="@+id/resName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant Name"
+            tools:layout_editor_absoluteX="138dp"
+            tools:layout_editor_absoluteY="200dp" />
 
-    <Button
-        android:id="@+id/callBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="487dp" />
+        <TextView
+            android:id="@+id/resDres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="238dp" />
 
-    <Button
-        android:id="@+id/orderBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Order"
-        tools:layout_editor_absoluteX="221dp"
-        tools:layout_editor_absoluteY="487dp" />
+        <ListView
+            android:id="@+id/listRecItem"
+            android:layout_width="220dp"
+            android:layout_height="171dp"
+            tools:layout_editor_absoluteX="82dp"
+            tools:layout_editor_absoluteY="288dp" />
+
+        <Button
+            android:id="@+id/callBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            tools:layout_editor_absoluteX="74dp"
+            tools:layout_editor_absoluteY="487dp" />
+
+        <Button
+            android:id="@+id/orderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order"
+            tools:layout_editor_absoluteX="221dp"
+            tools:layout_editor_absoluteY="487dp" />
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

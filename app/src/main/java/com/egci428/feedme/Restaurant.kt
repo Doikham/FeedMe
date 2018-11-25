@@ -1,6 +1,9 @@
 package com.egci428.feedme
 
-class Restaurant(val name: String, val description: String) {
+import android.graphics.Picture
+import android.net.Uri
+
+class Restaurant(val name: String, val description: String, val id: String) {
     override fun toString(): String {
         return super.toString()
     }
