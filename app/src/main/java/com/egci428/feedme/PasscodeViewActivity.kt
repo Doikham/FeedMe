@@ -97,7 +97,7 @@ class PasscodeViewActivity : AppCompatActivity() {
 
     private fun updateUI(){
 
-        val intent = Intent(this@PasscodeViewActivity, TestActivity::class.java)
+        val intent = Intent(this@PasscodeViewActivity, InfoActivity::class.java)
         startActivity(intent)
         finish()
 
