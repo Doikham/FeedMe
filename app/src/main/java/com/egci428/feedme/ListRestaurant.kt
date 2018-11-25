@@ -2,24 +2,74 @@ package com.egci428.feedme
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.location.places.GeoDataClient
+import com.google.android.gms.location.places.PlaceDetectionClient
+import com.google.android.gms.location.places.Places
 import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.restaurant_item.view.*
 
 class ListRestaurant : AppCompatActivity()  {
 
     protected var data:ArrayList<Restaurant>? = null
+    val PLACE_PICKER_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
+
+        var choice: Int = 0
+
+        var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
+
+        // Construct a PlaceDetectionClient.
+        var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
+
+        // TODO: Start using the Places API.
+
+        // restaurant is 79
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+        }
+        else {
+            val restaurantnum = 79
+            val cafenum = 15
+            val delnum = 60
+            val tanum = 61
+            val placeResult = mPlaceDetectionClient.getCurrentPlace(null)
+
+            placeResult.addOnCompleteListener { task ->
+                val likelyPlaces = task.result
+                if(choice == 1){
+                for (placeLikelihood in likelyPlaces) {
+                    if (placeLikelihood.place.placeTypes.contains(restaurantnum)) {
+                        Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng)
+                    }
+                }
+
+
+                }
+                likelyPlaces.release()
+            }
+
+
+
+
+
+        }
+
 
         //put list here; data = list.getData()
         data = Dataprovider.getData()
