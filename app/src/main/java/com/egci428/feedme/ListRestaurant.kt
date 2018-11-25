@@ -1,10 +1,13 @@
 package com.egci428.feedme
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -43,6 +46,13 @@ class ListRestaurant : AppCompatActivity()  {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
+
+            //Toast.makeText(this, "Please enable location services in order to continue",Toast.LENGTH_SHORT).show()
+            val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(this, permissions,0)
+
+            recreate()
+
         }
         else {
             val restaurantnum = 79
@@ -53,28 +63,32 @@ class ListRestaurant : AppCompatActivity()  {
 
             placeResult.addOnCompleteListener { task ->
                 val likelyPlaces = task.result
-                /*if(choice == 1){
+                if(choice == 1){
                 for (placeLikelihood in likelyPlaces) {
                     if (placeLikelihood.place.placeTypes.contains(restaurantnum)) {
                         Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng)
-                        //Toast.makeText(this,placeLikelihood.place.name.toString(),Toast.LENGTH_SHORT).show()
 
                     }
                 }
-                }*/
+                }
                 likelyPlaces.release()
+
+
+                //here
+                //put list here; data = list.getData()
+                data = Dataprovider.getData()
+                val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
+                listr.adapter = restaurantArrayAdapter
+
+                listr.setOnItemClickListener { adapterView, view, position, _ ->
+                    val restaurant = data!!.get(position)
+                    displayDetail(restaurant)
+                }
+
             }
 
         }
-        //put list here; data = list.getData()
-        data = Dataprovider.getData()
 
-        val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
-        listr.adapter = restaurantArrayAdapter
-        listr.setOnItemClickListener { adapterView, view, position, _ ->
-            val restaurant = data!!.get(position)
-            displayDetail(restaurant)
-        }
     }
 
     private fun displayDetail(restaurant: Restaurant){
