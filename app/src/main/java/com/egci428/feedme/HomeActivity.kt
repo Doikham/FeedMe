@@ -34,28 +34,28 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ListRestaurant::class.java )
             intent.putExtra("choice",1)
             startActivity(intent)
-            finish()
+
         }
 
         Cafe.setOnClickListener {
             val intent = Intent(this, ListRestaurant::class.java )
             intent.putExtra("choice",2)
             startActivity(intent)
-            finish()
+
         }
 
         Delivery.setOnClickListener {
             val intent = Intent(this, ListRestaurant::class.java )
             intent.putExtra("choice",3)
             startActivity(intent)
-            finish()
+
         }
 
         Takeaway.setOnClickListener {
             val intent = Intent(this, ListRestaurant::class.java )
             intent.putExtra("choice",4)
             startActivity(intent)
-            finish()
+            
         }
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
