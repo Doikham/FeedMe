@@ -112,6 +112,13 @@ class ListRestaurant : AppCompatActivity()  {
     private fun displayDetail(restaurant: Restaurant){
         val intent = Intent(this,RestaurantActivity::class.java)
         intent.putExtra("rname",restaurant.name)
+        intent.putExtra("raddress",restaurant.address)
+        intent.putExtra("rid",restaurant.id)
+        intent.putExtra("rphonenumber",restaurant.phonenumber)
+        intent.putExtra("rpricelevel",restaurant.pricelevel)
+        intent.putExtra("rrating",restaurant.rating)
+        intent.putExtra("rlatlng",restaurant.latlng)
+        startActivity(intent)
     }
 
     private class RestaurantArrayAdapter(var context: Context, var resource: Int, var objects: ArrayList<Restaurant>) : BaseAdapter() {

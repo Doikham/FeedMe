@@ -17,11 +17,23 @@ class RestaurantActivity : AppCompatActivity() {
         val name = intent.getStringExtra("rname")
         resName.text = name
 
-        val des = intent.getStringExtra("rdes")
-        resDres.text = des
+        val address = intent.getStringExtra("rdes")
+        resAdd.text = address
 
-        val img = intent.getIntExtra("rimg", 0)
-        resImg.setImageResource(img)
+        val phone = intent.getStringExtra("rphonenumber")
+        resPhone.text = phone
+
+        val price = intent.getIntExtra("rpricelevel")
+        resAdd.text = price.toString()
+
+        val rating = intent.getIntExtra("rrating")
+        resRating.text = rating.toString()
+
+        val latlng = intent.getStringExtra("rlatlng")
+        resLatlng.text = latlng
+
+        /*val img = intent.getIntExtra("rimg", 0)
+        resImg.setImageResource(img)*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

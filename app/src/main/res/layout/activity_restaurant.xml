@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="492dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,12 +27,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/resImg"
             android:layout_width="113dp"
             android:layout_height="102dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="77dp" />
@@ -41,41 +46,69 @@
             android:id="@+id/resName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="165dp"
             android:text="Restaurant Name"
             tools:layout_editor_absoluteX="138dp"
             tools:layout_editor_absoluteY="200dp" />
 
         <TextView
-            android:id="@+id/resDres"
+            android:id="@+id/resPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
-            tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="238dp" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="182dp"
+            android:text="Price level" />
 
-        <ListView
-            android:id="@+id/listRecItem"
-            android:layout_width="220dp"
-            android:layout_height="171dp"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="288dp" />
+        <TextView
+            android:id="@+id/resAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="207dp"
+            android:text="Address" />
+
+        <TextView
+            android:id="@+id/resRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="139dp"
+            android:text="Rating" />
+
+        <TextView
+            android:id="@+id/resLatlng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="101dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/resPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="224dp"
+            android:text="Phone" />
 
         <Button
             android:id="@+id/callBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="32dp"
             android:text="Call"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="487dp" />
 
-        <Button
-            android:id="@+id/orderBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order"
-            tools:layout_editor_absoluteX="221dp"
-            tools:layout_editor_absoluteY="487dp" />
-
-    </ScrollView>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
