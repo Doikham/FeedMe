@@ -1,5 +1,6 @@
 package com.egci428.feedme
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import com.egci428.feedme.R.id.tbHome
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -28,6 +30,33 @@ class HomeActivity : AppCompatActivity() {
             //setLogo(R.drawable.ic_logo_circle)
         }
 
+        Restaurant.setOnClickListener {
+            val intent = Intent(this, ListRestaurant::class.java )
+            intent.putExtra("choice",1)
+            startActivity(intent)
+            finish()
+        }
+
+        Cafe.setOnClickListener {
+            val intent = Intent(this, ListRestaurant::class.java )
+            intent.putExtra("choice",2)
+            startActivity(intent)
+            finish()
+        }
+
+        Delivery.setOnClickListener {
+            val intent = Intent(this, ListRestaurant::class.java )
+            intent.putExtra("choice",3)
+            startActivity(intent)
+            finish()
+        }
+
+        Takeaway.setOnClickListener {
+            val intent = Intent(this, ListRestaurant::class.java )
+            intent.putExtra("choice",4)
+            startActivity(intent)
+            finish()
+        }
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
