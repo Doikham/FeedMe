@@ -18,4 +18,8 @@ object Dataprovider {
 
         data.add(Restaurant(name,address,id,phonenumber, pricelevel, rating, latlng))
     }
+
+    fun clearData(){
+        data.clear()
+    }
 }

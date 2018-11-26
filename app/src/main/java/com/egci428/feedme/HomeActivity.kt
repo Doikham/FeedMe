@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ListRestaurant::class.java )
             intent.putExtra("choice",4)
             startActivity(intent)
-            
+
         }
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
@@ -101,4 +101,6 @@ class HomeActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

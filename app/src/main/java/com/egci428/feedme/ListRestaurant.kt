@@ -91,7 +91,6 @@ class ListRestaurant : AppCompatActivity()  {
                         //here
                 //put list here; data = list.getData()
 
-
                 //here
                 //put list here; data = list.getData()
                 data = Dataprovider.getData()
@@ -157,5 +156,11 @@ class ListRestaurant : AppCompatActivity()  {
             return view
         }
         private class ViewHolder(val restaurantName: TextView)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Dataprovider.clearData()
+
     }
 }
