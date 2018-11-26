@@ -47,7 +47,7 @@ class ListRestaurant : AppCompatActivity()  {
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
 
-            //Toast.makeText(this, "Please enable location services in order to continue",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please enable location services in order to continue",Toast.LENGTH_SHORT).show()
             val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
             ActivityCompat.requestPermissions(this, permissions,0)
 
@@ -63,20 +63,52 @@ class ListRestaurant : AppCompatActivity()  {
 
             placeResult.addOnCompleteListener { task ->
                 val likelyPlaces = task.result
-                if(choice == 1){
-                for (placeLikelihood in likelyPlaces) {
-                    if (placeLikelihood.place.placeTypes.contains(restaurantnum)) {
-                        Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng)
+                if(choice == 1) {
+                    for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(restaurantnum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(), placeLikelihood.place.address.toString(), placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
 
+                        }
                     }
                 }
+                if(choice == 2) {
+                    for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(cafenum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(), placeLikelihood.place.address.toString(), placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
+
+                        }
+                    }
                 }
+                if(choice == 3) {
+                    for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(delnum)) {
+                                Dataprovider.addData(placeLikelihood.place.name.toString(), placeLikelihood.place.address.toString(), placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
+
+                        }
+                    }
+                }
+                if(choice == 4) {
+                    for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(tanum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(), placeLikelihood.place.address.toString(), placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
+
+                        }
+                    }
+                }
+
                 likelyPlaces.release()
 
 
                 //here
                 //put list here; data = list.getData()
                 data = Dataprovider.getData()
+                if(data == null) {
+//                    noresultTextView.visibility = View.VISIBLE
+//                    listr.visibility = View.INVISIBLE
+
+                    val intent = Intent(this, TestActivity::class.java)
+                    startActivity(intent)
+                }
                 val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
                 listr.adapter = restaurantArrayAdapter
 
