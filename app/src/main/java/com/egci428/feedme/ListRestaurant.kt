@@ -110,13 +110,22 @@ class ListRestaurant : AppCompatActivity()  {
 
     private fun displayDetail(restaurant: Restaurant){
         val intent = Intent(this,RestaurantActivity::class.java)
+
         intent.putExtra("rname",restaurant.name)
+        Log.d("Extra",restaurant.name)
         intent.putExtra("raddress",restaurant.address)
+        Log.d("Extra",restaurant.address)
         intent.putExtra("rid",restaurant.id)
+        Log.d("Extra",restaurant.id)
         intent.putExtra("rphonenumber",restaurant.phonenumber)
+        Log.d("Extra",restaurant.phonenumber)
         intent.putExtra("rpricelevel",restaurant.pricelevel)
+        Log.d("Extra",restaurant.pricelevel.toString())
         intent.putExtra("rrating",restaurant.rating)
+        Log.d("Extra",restaurant.rating.toString())
         intent.putExtra("rlatlng",restaurant.latlng)
+        Log.d("Extra",restaurant.latlng.toString())
+
         startActivity(intent)
     }
 

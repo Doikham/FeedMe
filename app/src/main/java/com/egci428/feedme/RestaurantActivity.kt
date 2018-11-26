@@ -12,28 +12,30 @@ class RestaurantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         val name = intent.getStringExtra("rname")
         resName.text = name
 
-        val address = intent.getStringExtra("rdes")
+        val address = intent.getStringExtra("raddress")
         resAdd.text = address
 
         val phone = intent.getStringExtra("rphonenumber")
         resPhone.text = phone
 
-        val price = intent.getIntExtra("rpricelevel")
-        resAdd.text = price.toString()
+        val price = intent.getIntExtra("rpricelevel",0)
+        resPrice.text = price.toString()
 
-        val rating = intent.getIntExtra("rrating")
+        val rating = intent.getFloatExtra("rrating",0.0F)
         resRating.text = rating.toString()
 
-        val latlng = intent.getStringExtra("rlatlng")
-        resLatlng.text = latlng
+        val latlng = intent.getFloatArrayExtra("rlatlng")
+        //resLatlng.text = latlng
 
         /*val img = intent.getIntExtra("rimg", 0)
         resImg.setImageResource(img)*/
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,11 +43,11 @@ class RestaurantActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.getItemId()
-        if (id == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val id = item.getItemId()
+//        if (id == android.R.id.home) {
+//            finish()
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 }
