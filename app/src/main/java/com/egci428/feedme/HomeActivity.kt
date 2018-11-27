@@ -10,16 +10,22 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
-import com.egci428.feedme.R.id.tbHome
+import android.widget.Toast
+import com.egci428.feedme.R.id.*
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity()  {
 
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+
+        auth = FirebaseAuth.getInstance()
 
         val toolbar: Toolbar = findViewById(R.id.tbHome)
         setSupportActionBar(toolbar)
@@ -62,15 +68,29 @@ class HomeActivity : AppCompatActivity() {
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
-            menuItem.isChecked = true
+            when(menuItem.itemId){
+                R.id.logoutDraw -> {
+                    auth.signOut()
+                    val user = auth.currentUser
+                    if(user == null){
+                        val intent = Intent(this,LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                }
+            }
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()
 
             // Add code here to update the UI based on the item selected
             // For example, swap UI fragments here
-
             true
+
         }
+
+
+
         mDrawerLayout.addDrawerListener(
                 object : DrawerLayout.DrawerListener {
                     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -99,8 +119,11 @@ class HomeActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
+            }
+
     }
+
+
 
 
 }

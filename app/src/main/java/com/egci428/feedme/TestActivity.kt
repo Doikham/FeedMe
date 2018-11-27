@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInApi
 
 
 private lateinit var auth: FirebaseAuth
-const val RC_SIGN_OUT = 234
+//const val RC_SIGN_OUT = 234
 
 class TestActivity : AppCompatActivity() {
 

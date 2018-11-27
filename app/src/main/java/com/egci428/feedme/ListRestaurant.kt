@@ -29,16 +29,18 @@ class ListRestaurant : AppCompatActivity()  {
     protected var data:ArrayList<Restaurant>? = null
     val PLACE_PICKER_REQUEST = 1
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
 
         var choose:Int = intent.getIntExtra("choice",0)
 
-        var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
+        //var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
         // Construct a PlaceDetectionClient.
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
+
 
         // TODO: Start using the Places API.
 
