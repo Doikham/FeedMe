@@ -123,8 +123,10 @@ class ListRestaurant : AppCompatActivity()  {
         Log.d("Extra",restaurant.pricelevel.toString())
         intent.putExtra("rrating",restaurant.rating)
         Log.d("Extra",restaurant.rating.toString())
-        intent.putExtra("rlatlng",restaurant.latlng)
-        Log.d("Extra",restaurant.latlng.toString())
+        intent.putExtra("rlat",restaurant.latlng.latitude)
+        Log.d("Extra",restaurant.latlng.latitude.toString())
+        intent.putExtra("rlong",restaurant.latlng.longitude)
+        Log.d("Extra",restaurant.latlng.longitude.toString())
 
         startActivity(intent)
     }
@@ -150,26 +152,22 @@ class ListRestaurant : AppCompatActivity()  {
             if (convertView == null) {
                 val layoutInflater = LayoutInflater.from(parent!!.context)
                 view = layoutInflater.inflate(R.layout.restaurant_item, parent, false)
-                val viewHolder = ViewHolder(view.ResListName)
+                val viewHolder = ViewHolder(view.ResListName,view.resListImg)
                 view.tag = viewHolder
             } else {
                 view = convertView
             }
             val viewHolder = view.tag as ViewHolder
             viewHolder.restaurantName.text = restaurant.name
-            //Toast.makeText(context,"IN"+restaurant.name.toString(),Toast.LENGTH_SHORT).show()
-            //val res = context.resources.getIdentifier()
-            //Upper line sets res as a place where we use image
-            //viewHolder.restaurantImg.setImageResource(res)
-            //Upper line sets viewHolder to store image
+            val res = context.resources.getIdentifier(restaurant.id,"drawable",context.packageName)
+            viewHolder.restaurantImg.setImageResource(res)
             return view
         }
-        private class ViewHolder(val restaurantName: TextView)
+        private class ViewHolder(val restaurantName: TextView, val restaurantImg: ImageView)
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Dataprovider.clearData()
-
+        Dataprovider.clearData() //Clear data in Dataprovider
     }
 }
