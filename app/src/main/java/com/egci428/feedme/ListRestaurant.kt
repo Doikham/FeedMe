@@ -25,6 +25,7 @@ import android.widget.Toast
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.PlaceDetectionClient
 import com.google.android.gms.location.places.Places
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.restaurant_item.view.*
 import java.util.*
@@ -144,7 +145,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         Log.d("Extra",restaurant.pricelevel.toString())
         intent.putExtra("rrating",restaurant.rating)
         Log.d("Extra",restaurant.rating.toString())
-        intent.putExtra("rlat",restaurant.latlng.latitude)
+        intent.putExtra("rlat",restaurant.latlng.longitude)
         Log.d("Extra",restaurant.latlng.latitude.toString())
         intent.putExtra("rlong",restaurant.latlng.longitude)
         Log.d("Extra",restaurant.latlng.longitude.toString())

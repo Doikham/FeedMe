@@ -70,9 +70,9 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val rating = intent.getFloatExtra("rrating",0.0F)
         resRating.text = rating.toString()
 
-        val lat = intent.getFloatExtra("rlat",0.0F)
-        val long = intent.getFloatExtra("rlong",0.0F)
-        resLatlng.text = lat.toString()+","+long.toString()
+        val lat = intent.getDoubleExtra("rlat",0.0)
+        val long = intent.getDoubleExtra("rlong",0.0)
+        resLatlng.text = lat.toString()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -98,7 +98,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         showBtn.setOnClickListener {
-            val latLng = LatLng(lat.toString().toDouble(),long.toString().toDouble())
+            val latLng = LatLng(lat,long)
             val markerOptions = MarkerOptions().position(latLng)
             mMap.addMarker(markerOptions)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
