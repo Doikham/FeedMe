@@ -34,7 +34,7 @@ class RestaurantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restaurant)
         //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
+        var mGeoDataClient2 = Places.getGeoDataClient(this,null) as GeoDataClient
 
         // Construct a PlaceDetectionClient.
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
@@ -62,7 +62,7 @@ class RestaurantActivity : AppCompatActivity() {
 
         /*val img = intent.getIntExtra("rimg", 0)
         resImg.setImageResource(img)*/
-        getPhotos(id, mGeoDataClient)
+        getPhotos(id, mGeoDataClient2)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,8 +79,8 @@ class RestaurantActivity : AppCompatActivity() {
 //    }
 
 
-    private fun getPhotos(placeId: String, mGeoDataClient: GeoDataClient) {
-        val photoMetadataResponse = mGeoDataClient.getPlacePhotos(placeId)
+    private fun getPhotos(placeId: String, mGeoDataClient2: GeoDataClient) {
+        val photoMetadataResponse = mGeoDataClient2.getPlacePhotos(placeId)
         photoMetadataResponse.addOnCompleteListener { task ->
             // Get the list of photos.
             val photos = task.result
@@ -91,7 +91,7 @@ class RestaurantActivity : AppCompatActivity() {
             // Get the attribution text.
             val attribution = photoMetadata.attributions
             // Get a full-size bitmap for the photo.
-            val photoResponse = mGeoDataClient.getPhoto(photoMetadata)
+            val photoResponse = mGeoDataClient2.getPhoto(photoMetadata)
             photoResponse.addOnCompleteListener { pic ->
                 val photo = pic.result
                 val bitmap = photo.bitmap
