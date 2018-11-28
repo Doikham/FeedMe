@@ -18,7 +18,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="492dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -83,21 +83,29 @@
             android:text="Rating" />
 
         <TextView
-            android:id="@+id/resLatlng"
+            android:id="@+id/resLat"
             android:layout_width="wrap_content"
             android:layout_height="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="181dp"
+            android:layout_alignBaseline="@+id/showBtn"
             android:layout_toStartOf="@+id/resPrice"
             android:text="LatLang" />
+
+        <TextView
+            android:id="@+id/resLong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/showBtn"
+            android:layout_toStartOf="@+id/resAdd"
+            android:text="TextView" />
 
         <Button
             android:id="@+id/showBtn"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_below="@+id/resRating"
+            android:layout_marginEnd="78dp"
             android:layout_marginTop="-216dp"
-            android:layout_toEndOf="@+id/resImg"
             android:text="Show in map"
             android:textSize="8sp" />
 
@@ -111,8 +119,8 @@
             android:text="Phone" />
 
         <LinearLayout
-            android:layout_width="117dp"
-            android:layout_height="98dp"
+            android:layout_width="103dp"
+            android:layout_height="89dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="61dp"

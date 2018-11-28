@@ -71,8 +71,10 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         resRating.text = rating.toString()
 
         val lat = intent.getDoubleExtra("rlat",0.0)
+        resLat.text = lat.toString()
+
         val long = intent.getDoubleExtra("rlong",0.0)
-        resLatlng.text = lat.toString()
+        resLong.text = long.toString()
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
