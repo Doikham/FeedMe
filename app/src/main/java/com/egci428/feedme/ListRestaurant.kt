@@ -144,8 +144,10 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         Log.d("Extra",restaurant.pricelevel.toString())
         intent.putExtra("rrating",restaurant.rating)
         Log.d("Extra",restaurant.rating.toString())
-        intent.putExtra("rlatlng",restaurant.latlng)
-        Log.d("Extra",restaurant.latlng.toString())
+        intent.putExtra("rlat",restaurant.latlng.latitude)
+        Log.d("Extra",restaurant.latlng.latitude.toString())
+        intent.putExtra("rlong",restaurant.latlng.longitude)
+        Log.d("Extra",restaurant.latlng.longitude.toString())
 
         startActivity(intent)
 
