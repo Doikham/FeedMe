@@ -27,6 +27,7 @@ import com.google.android.gms.location.places.PlaceDetectionClient
 import com.google.android.gms.location.places.Places
 import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.restaurant_item.view.*
+import java.util.*
 
 class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
@@ -35,6 +36,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
     private var sensorManager: SensorManager? = null
     private var lastUpdate: Long = 0
     private var color = false
+    var gone: Boolean = false
 
 
 
@@ -116,7 +118,9 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
                 listr.setOnItemClickListener { adapterView, view, position, _ ->
                     val restaurant = data!!.get(position)
+                    Log.d("supyo","$position")
                     displayDetail(restaurant)
+
                 }
 
             }
@@ -144,9 +148,10 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         Log.d("Extra",restaurant.latlng.toString())
 
         startActivity(intent)
+
     }
 
-    private class RestaurantArrayAdapter(var context: Context, var resource: Int, var objects: ArrayList<Restaurant>) : BaseAdapter() {
+    class RestaurantArrayAdapter(var context: Context, var resource: Int, var objects: ArrayList<Restaurant>) : BaseAdapter() {
 
         override fun getCount(): Int {
             return objects.size
@@ -175,32 +180,30 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
             val viewHolder = view.tag as ViewHolder
             viewHolder.restaurantName.text = restaurant.name
 
-//            val photoMetadataResponse = restaurant.mGeoDataClient.getPlacePhotos(restaurant.id)
-//            Log.d("supyo","Get photos from Google")
-//            photoMetadataResponse.addOnCompleteListener { meta ->
-//                // Get the list of photos.
-//                val photos = meta.result
-//                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-//                val photoMetadataBuffer = photos.photoMetadata
-//                // Get the first photo in the list.
-//                if(photoMetadataBuffer != null) {
-//                    val photoMetadata = photoMetadataBuffer.get(0)
-//                    // Get the attribution text.
-//                    val attribution = photoMetadata.attributions
-//                    // Get a full-size bitmap for the photo.
-//                    val photoResponse = restaurant.mGeoDataClient.getPhoto(photoMetadata)
-//                    Log.d("supyo", "Get photos Metadata")
-//                    photoResponse.addOnCompleteListener { pic ->
-//                        Log.d("supyo", "In laew")
-//                        val photo = pic.result
-//                        val bitmap = photo.bitmap
-//                        Log.d("supyo", "Get photo")
-//                        viewHolder.restaurantImg.setImageBitmap(bitmap)
-//
-//                    }
-//                }
-//
-//            }
+            val photoMetadataResponse = restaurant.mGeoDataClient.getPlacePhotos(restaurant.id)
+            photoMetadataResponse.addOnCompleteListener { task ->
+                // Get the list of photos.
+                val photos = task.result
+                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+                val photoMetadataBuffer = photos.photoMetadata
+                if(photoMetadataBuffer.count() != 0) {
+                // Get the first photo in the list.
+                val photoMetadata = photoMetadataBuffer.get(0)
+                // Get the attribution text.
+                val attribution = photoMetadata.attributions
+                // Get a full-size bitmap for the photo.
+
+                    val photoResponse = restaurant.mGeoDataClient.getPhoto(photoMetadata)
+                    photoResponse.addOnCompleteListener { pic ->
+                        val photo = pic.result
+                        val bitmap = photo.bitmap
+                        viewHolder.restaurantImg.setImageBitmap(bitmap)
+                    }
+                }
+                photoMetadataBuffer.release()
+
+            }
+
             return view
         }
         private class ViewHolder(val restaurantName: TextView, val restaurantImg: ImageView)
@@ -227,13 +230,24 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         val accel = (x*x + y*y + z*z)/(SensorManager.GRAVITY_EARTH*SensorManager.GRAVITY_EARTH)
 
         val actualTime = System.currentTimeMillis()
-        if(accel >= 2){
+        if(accel >= 10){
             if((actualTime - lastUpdate)< 200){
                 return
             }
 
             // TODO: Here
-            Toast.makeText(this,"Shake de",Toast.LENGTH_SHORT).show()
+
+            if(gone == false) {
+
+                val size = RestaurantArrayAdapter(this, 0, data!!).count
+                val nextInt = Random().nextInt(size)
+                val restaurant = data!!.get(nextInt)
+                displayDetail(restaurant)
+                Log.d("supyo", "Activity Launched $count")
+                //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
+                gone = true
+            }
+
 
         }
     }
@@ -246,6 +260,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
     override fun onResume() {
         super.onResume()
         sensorManager!!.registerListener(this,sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+        gone = false
     }
 
     override fun onPause() {

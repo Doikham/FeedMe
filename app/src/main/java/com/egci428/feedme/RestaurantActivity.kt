@@ -20,6 +20,10 @@ import com.google.android.gms.location.places.ui.PlacePicker.getAttributions
 import com.google.android.gms.location.places.PlacePhotoMetadata
 import com.google.android.gms.location.places.PlacePhotoMetadataBuffer
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 
 
@@ -27,6 +31,9 @@ import com.google.android.gms.location.places.PlacePhotoMetadataResponse
 
 class RestaurantActivity : AppCompatActivity() {
 
+    var setFav = false
+    var database = FirebaseDatabase.getInstance()
+    var myRef = database.getReference("message")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,16 +94,28 @@ class RestaurantActivity : AppCompatActivity() {
             // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
             val photoMetadataBuffer = photos.photoMetadata
             // Get the first photo in the list.
-            val photoMetadata = photoMetadataBuffer.get(0)
-            // Get the attribution text.
-            val attribution = photoMetadata.attributions
-            // Get a full-size bitmap for the photo.
-            val photoResponse = mGeoDataClient2.getPhoto(photoMetadata)
-            photoResponse.addOnCompleteListener { pic ->
-                val photo = pic.result
-                val bitmap = photo.bitmap
-                resImg.setImageBitmap(bitmap)
+            if(photoMetadataBuffer.count() != 0) {
+                val photoMetadata = photoMetadataBuffer.get(0)
+                // Get the attribution text.
+                val attribution = photoMetadata.attributions
+                // Get a full-size bitmap for the photo.
+                val photoResponse = mGeoDataClient2.getPhoto(photoMetadata)
+                photoResponse.addOnCompleteListener { pic ->
+                    val photo = pic.result
+                    val bitmap = photo.bitmap
+                    resImg.setImageBitmap(bitmap)
+
+                }
             }
+            photoMetadataBuffer.release()
         }
     }
+
+    fun setFavorite(id: String){
+
+    }
+
+
+
+
 }
