@@ -19,6 +19,7 @@ import android.location.LocationManager
 import com.google.android.gms.location.places.PlacePhotoResponse
 import com.google.android.gms.tasks.Task
 import android.support.annotation.NonNull
+import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.location.places.ui.PlacePicker.getAttributions
 import com.google.android.gms.location.places.PlacePhotoMetadata
@@ -72,9 +73,11 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val lat = intent.getDoubleExtra("rlat",0.0)
         resLat.text = lat.toString()
+        Log.d("lattt",lat.toString())
 
         val long = intent.getDoubleExtra("rlong",0.0)
         resLong.text = long.toString()
+        Log.d("lattt",long.toString())
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
