@@ -48,6 +48,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         setContentView(R.layout.activity_list_restaurant)
 
         tbListRes.setNavigationOnClickListener{
+            Dataprovider.clearData()
             finish()
         }
         tbListRes.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)

@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.provider.ContactsContract
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -40,7 +41,7 @@ import kotlinx.android.synthetic.main.fav_item.view.*
 import kotlinx.android.synthetic.main.restaurant_item.view.*
 import java.util.*
 
-class FavActivity : AppCompatActivity() {
+class FavActivity : AppCompatActivity(),  SensorEventListener {
 
     protected var data: ArrayList<Favourite>? = null
     val PLACE_PICKER_REQUEST = 1
@@ -53,12 +54,16 @@ class FavActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
 
+
         tbListRes.setNavigationOnClickListener{
+            DataproviderFav.clearData()
             finish()
+
         }
         tbListRes.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
 
@@ -66,48 +71,52 @@ class FavActivity : AppCompatActivity() {
 
         lastUpdate = System.currentTimeMillis()
 
-        //    var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
+        var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                if(dataSnapshot!!.exists()) {
-                    for (i in dataSnapshot.children) {
-                        if (i.key == user!!.uid) {
-                            val userdata = myRef.child(user!!.uid)
-                            Log.d("kkkkk",i.key)
-                            userdata.addValueEventListener(object: ValueEventListener {
+            val postListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Get Post object and use the values to update the UI
+                    if (dataSnapshot!!.exists()) {
+                        for (i in dataSnapshot.children) {
+                            if (i.key == user!!.uid) {
+                                val userdata = myRef.child(user!!.uid)
+                                Log.d("kkkkk", i.key)
+                                userdata.addValueEventListener(object : ValueEventListener {
 
-                                override fun onDataChange(dataSnapshot2: DataSnapshot) {
-                                    if(dataSnapshot2!!.exists()) {
-                                        DataproviderFav.clearData()
-                                        for (j in dataSnapshot2.children) {
-                                            val datadb = j.getValue(RestaurantDB::class.java)
-                                            DataproviderFav.addData(datadb!!.name,datadb!!.address,datadb!!.id,datadb!!.phonenumber,datadb!!.pricelevel,datadb!!.rating,datadb!!.lat,datadb!!.long)
-                                            Log.d("favorite",datadb.name)
-                                            Log.d("favorite",DataproviderFav.getData().size.toString())
+                                    override fun onDataChange(dataSnapshot2: DataSnapshot) {
+                                        if (dataSnapshot2!!.exists()) {
+                                            DataproviderFav.clearData()
+                                            for (j in dataSnapshot2.children) {
+                                                val datadb = j.getValue(RestaurantDB::class.java)
+                                                DataproviderFav.addData(datadb!!.name, datadb!!.address, datadb!!.id, datadb!!.phonenumber, datadb!!.pricelevel, datadb!!.rating, datadb!!.lat, datadb!!.long, mGeoDataClient)
+                                                Log.d("favorite", datadb.name)
+                                                Log.d("favorite", DataproviderFav.getData().size.toString())
 
 
+                                            }
                                         }
+
+
                                     }
 
-
+                                    override fun onCancelled(databaseError2: DatabaseError) {}
                                 }
-                                override fun onCancelled(databaseError2: DatabaseError) {}
+                                )
                             }
-                            )
                         }
                     }
                 }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-                // ...
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                    // ...
+                }
+
+
             }
-        }
-        myRef.addValueEventListener(postListener)
+            myRef.addValueEventListener(postListener)
+
 
 
 
@@ -144,6 +153,8 @@ class FavActivity : AppCompatActivity() {
         intent.putExtra("rlat", restaurant.lat)
         intent.putExtra("rlong", restaurant.long)
 
+        DataproviderFav.clearData()
+
         startActivity(intent)
 
 
@@ -179,32 +190,94 @@ class FavActivity : AppCompatActivity() {
             viewHolder.restaurantName.text = restaurant.name
             Log.d("favorite",restaurant.name)
 
-//            val photoMetadataResponse = restaurant.mGeoDataClient.getPlacePhotos(restaurant.id)
-//            photoMetadataResponse.addOnCompleteListener { task ->
-//                // Get the list of photos.
-//                val photos = task.result
-//                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
-//                val photoMetadataBuffer = photos.photoMetadata
-//                if(photoMetadataBuffer.count() != 0) {
-//                    // Get the first photo in the list.
-//                    val photoMetadata = photoMetadataBuffer.get(0)
-//                    // Get the attribution text.
-//                    val attribution = photoMetadata.attributions
-//                    // Get a full-size bitmap for the photo.
-//
-//                    val photoResponse = restaurant.mGeoDataClient.getPhoto(photoMetadata)
-//                    photoResponse.addOnCompleteListener { pic ->
-//                        val photo = pic.result
-//                        val bitmap = photo.bitmap
-//                        viewHolder.restaurantImg.setImageBitmap(bitmap)
-//                    }
-//                }
-//                photoMetadataBuffer.release()
-//
-//            }
+            val photoMetadataResponse = restaurant.mGeoDataClient.getPlacePhotos(restaurant.id)
+            photoMetadataResponse.addOnCompleteListener { task ->
+                // Get the list of photos.
+                val photos = task.result
+                // Get the PlacePhotoMetadataBuffer (metadata for all of the photos).
+                val photoMetadataBuffer = photos.photoMetadata
+                if(photoMetadataBuffer.count() != 0) {
+                    // Get the first photo in the list.
+                    val photoMetadata = photoMetadataBuffer.get(0)
+                    // Get the attribution text.
+                    val attribution = photoMetadata.attributions
+                    // Get a full-size bitmap for the photo.
+
+                    val photoResponse = restaurant.mGeoDataClient.getPhoto(photoMetadata)
+                    photoResponse.addOnCompleteListener { pic ->
+                        val photo = pic.result
+                        val bitmap = photo.bitmap
+                        viewHolder.restaurantImg.setImageBitmap(bitmap)
+                    }
+                }
+                photoMetadataBuffer.release()
+
+            }
+
 
             return view
         }
         private class ViewHolder(val restaurantName: TextView, val restaurantImg: ImageView)
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Dataprovider.clearData()
+
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER){
+            getAccelerometer(event)
+        }
+    }
+    private fun getAccelerometer(event: SensorEvent){
+        val values = event.values
+
+        val x = values[0]
+        val y = values[1]
+        val z = values[2]
+
+        val accel = (x*x + y*y + z*z)/(SensorManager.GRAVITY_EARTH*SensorManager.GRAVITY_EARTH)
+
+        val actualTime = System.currentTimeMillis()
+        if(accel >= 10){
+            if((actualTime - lastUpdate)< 200){
+                return
+            }
+
+
+            if(gone == false) {
+
+                val size = RestaurantArrayAdapter(this, 0, data!!).count
+                val nextInt = Random().nextInt(size)
+                val restaurant = data!!.get(nextInt)
+                displayDetail(restaurant)
+                Log.d("supyo", "Activity Launched $count")
+                //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
+                gone = true
+            }
+
+
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager!!.registerListener(this,sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+        gone = false
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager!!.unregisterListener(this)
+    }
+
 }
+
+
