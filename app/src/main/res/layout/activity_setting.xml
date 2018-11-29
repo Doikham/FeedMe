@@ -6,54 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <Button
-        android:id="@+id/editInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Edit Info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
-
-    <Switch
-        android:id="@+id/darkTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Set Dark Theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editInfo" />
-
-    <Button
-        android:id="@+id/clearHis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Clear History"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/darkTheme" />
-
-    <Button
-        android:id="@+id/logOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Log Out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clearHis" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/tbSetting"
         android:layout_width="match_parent"
@@ -64,15 +16,67 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ImageView
-        android:id="@+id/profileImg"
-        android:layout_width="121dp"
-        android:layout_height="115dp"
+    <LinearLayout
+        android:layout_width="293dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSetting"
-        app:srcCompat="@drawable/ic_logo_circle" />
+        app:layout_constraintTop_toBottomOf="@+id/tbSetting">
+
+        <ImageView
+            android:id="@+id/profileImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/ic_logo_circle" />
+
+        <Button
+            android:id="@+id/editInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="Edit Info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+
+        <Button
+            android:id="@+id/clearFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="Clear Favourite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editInfo" />
+
+        <TextView
+            android:id="@+id/devNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clearFav" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

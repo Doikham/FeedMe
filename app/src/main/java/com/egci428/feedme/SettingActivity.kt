@@ -19,13 +19,11 @@ class SettingActivity : AppCompatActivity() {
             finish()
         }
 
-        /*val switch: Switch = findViewById(R.id.darkTheme)
-        switch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
+        clearFav.setOnClickListener{
 
-            } else{
+        }
 
-            }
-        }*/
+        val note: String = ("This app was inspired by food brochure and was created by two hungry students")
+        devNote.text = note
     }
 }

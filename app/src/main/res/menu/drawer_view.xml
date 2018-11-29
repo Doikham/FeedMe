@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
     <group
         android:id="@+id/group"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/settingDraw"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/setting" />
-        <item
-            android:id="@+id/historyDraw"
-            android:icon="@drawable/ic_history"
-            android:title="@string/history" />
-        <item
-            android:id="@+id/scheduleDraw"
-            android:icon="@drawable/ic_schedule"
-            android:title="@string/schedule" />
-        <item
-            android:id="@+id/logoutDraw"
-            android:icon="@drawable/ic_power_settings_new_black_24dp"
-            android:title="Log Out" />
-    </group>
+        android:checkableBehavior="single"></group>
+    <item
+        android:id="@+id/settingDraw"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/setting" />
+    <item
+        android:id="@+id/historyDraw"
+        android:checkable="false"
+        android:icon="@drawable/ic_history"
+        android:title="@string/history" />
+    <item
+        android:id="@+id/logoutDraw"
+        android:icon="@drawable/ic_power_settings_new_black_24dp"
+        android:title="Log Out" />
 </menu>

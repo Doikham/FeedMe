@@ -32,96 +32,78 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true">
 
-                <Button
-                    android:id="@+id/shakeBtn"
-                    android:layout_width="170dp"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
                     android:layout_marginEnd="8dp"
-
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:elevation="0dp"
-                    android:text="SHAKE"
+                    android:layout_marginTop="20dp"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/nearbyBtn"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_conversion_absoluteHeight="41dp"
-                    tools:layout_conversion_absoluteWidth="192dp" />
-
-                <Button
-                    android:id="@+id/nearbyBtn"
-                    android:layout_width="170dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Nearby"
-                    app:layout_constraintEnd_toStartOf="@+id/shakeBtn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_conversion_absoluteHeight="41dp"
-                    tools:layout_conversion_absoluteWidth="192dp" />
-
-                <ListView
-                    android:id="@+id/recRes"
-                    android:layout_width="368dp"
-                    android:layout_height="132dp"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="64dp"
-                    tools:ignore="MissingConstraints" />
+                    app:srcCompat="@drawable/ic_logo_circle" />
 
                 <android.support.v7.widget.GridLayout
                     android:id="@+id/Grid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="250dp"
+                    android:layout_height="247dp"
+                    android:layout_marginBottom="24dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recRes"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toBottomOf="@+id/userMsg">
 
                     <ImageButton
                         android:id="@+id/Restaurant"
-                        android:layout_width="165dp"
-                        android:layout_height="165dp"
-                        android:scaleType="fitCenter"
+                        android:layout_width="124dp"
+                        android:layout_height="124dp"
                         app:srcCompat="@drawable/ic_restaurant_black_24dp" />
 
                     <ImageButton
                         android:id="@+id/Cafe"
-                        android:layout_width="165dp"
-                        android:layout_height="165dp"
-                        android:scaleType="fitCenter"
+                        android:layout_width="124dp"
+                        android:layout_height="124dp"
                         app:layout_column="1"
                         app:layout_row="0"
                         app:srcCompat="@drawable/ic_local_cafe_black_24dp" />
 
                     <ImageButton
                         android:id="@+id/Delivery"
-                        android:layout_width="165dp"
-                        android:layout_height="165dp"
+                        android:layout_width="124dp"
+                        android:layout_height="124dp"
                         android:adjustViewBounds="false"
                         android:elevation="0dp"
-                        android:scaleType="fitCenter"
                         app:layout_column="0"
                         app:layout_row="1"
                         app:srcCompat="@drawable/ic_directions_bike_black_24dp" />
 
                     <ImageButton
                         android:id="@+id/Takeaway"
-                        android:layout_width="165dp"
-                        android:layout_height="165dp"
-                        android:scaleType="fitCenter"
+                        android:layout_width="124dp"
+                        android:layout_height="124dp"
                         app:layout_column="1"
                         app:layout_row="1"
                         app:srcCompat="@drawable/ic_shopping_basket_black_24dp" />
                 </android.support.v7.widget.GridLayout>
+
+                <TextView
+                    android:id="@+id/userMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:text="userHelp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profileImg" />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
@@ -133,7 +115,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_view">
 
     </android.support.design.widget.NavigationView>

@@ -10,10 +10,14 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.egci428.feedme.R.id.*
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_info.*
 
 class HomeActivity : AppCompatActivity()  {
 
@@ -24,8 +28,23 @@ class HomeActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-
         auth = FirebaseAuth.getInstance()
+
+        val user = auth.currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+            val telephone = user.phoneNumber
+            // Check if user's email is verified
+            val emailVerified = user.isEmailVerified
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            val uid = user.uid
+            //profileImg.setImageURI(photoUrl)
+        }
 
         val toolbar: Toolbar = findViewById(R.id.tbHome)
         setSupportActionBar(toolbar)
@@ -35,6 +54,9 @@ class HomeActivity : AppCompatActivity()  {
             setHomeAsUpIndicator(R.drawable.ic_menu)
             //setLogo(R.drawable.ic_logo_circle)
         }
+
+        val userHelp: String = ("Choose the category below to start searching for nearby restaurant")
+        userMsg.text = userHelp
 
         Restaurant.setOnClickListener {
             val intent = Intent(this, ListRestaurant::class.java )
@@ -66,6 +88,11 @@ class HomeActivity : AppCompatActivity()  {
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val hView =  navigationView.inflateHeaderView(R.layout.nav_header)
+        val uimg:ImageView = hView.findViewById(R.id.userImgNav)
+        val uuser:TextView = hView.findViewById(R.id.usernameNav)
+        uimg.setImageURI(user!!.photoUrl)
+        uuser.text = user!!.displayName
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             when(menuItem.itemId){
