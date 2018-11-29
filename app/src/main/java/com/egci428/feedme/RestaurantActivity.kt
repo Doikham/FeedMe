@@ -70,9 +70,11 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
         favButton.setOnClickListener {
             if (setFav == true){
+                favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
                 setFav = false
             }
-            if(setFav == false){
+            if (setFav == false){
+                favButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
                 setFav = true
             }
             Log.d("kkkkk",setFav.toString())
