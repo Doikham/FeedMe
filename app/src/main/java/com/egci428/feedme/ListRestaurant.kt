@@ -158,7 +158,9 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         intent.putExtra("rlong",restaurant.latlng.longitude)
         Log.d("lattt",restaurant.latlng.longitude.toString())
 
+
         startActivity(intent)
+
 
     }
 
@@ -271,6 +273,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         super.onResume()
         sensorManager!!.registerListener(this,sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
         gone = false
+
     }
 
     override fun onPause() {

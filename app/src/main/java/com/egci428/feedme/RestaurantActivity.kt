@@ -97,6 +97,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
                                         for (j in dataSnapshot2.children) {
                                             if(j.key == id){
                                                 setFav == true
+                                                Log.d("kkkkk","Favorite de")
                                             }
                                         }
                                     }
@@ -222,6 +223,10 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         myRef.child(uid).child(id).setValue(restaurant)
 
 
+    }
+    fun delFavorite(id: String){
+        val uid = user!!.uid
+        myRef.child(uid).child(id).removeValue()
     }
 
 }
