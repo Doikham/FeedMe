@@ -22,6 +22,7 @@ import android.support.annotation.NonNull
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.location.places.ui.PlacePicker.getAttributions
 import com.google.android.gms.location.places.PlacePhotoMetadata
@@ -34,8 +35,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -48,6 +48,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     var setFav = false
     var database = FirebaseDatabase.getInstance()
     var myRef = database.getReference()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +72,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
+
         val name = intent.getStringExtra("rname")
         val address = intent.getStringExtra("raddress")
         val phone = intent.getStringExtra("rphonenumber")
@@ -79,6 +81,46 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val lat = intent.getDoubleExtra("rlat",0.0)
         val long = intent.getDoubleExtra("rlong",0.0)
         val id = intent.getStringExtra("rid")
+
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if(dataSnapshot!!.exists()) {
+                    for (i in dataSnapshot.children) {
+                        if (i.key == user!!.uid) {
+                            val userdata = myRef.child(user!!.uid)
+                            Log.d("kkkkk",i.key)
+                            userdata.addValueEventListener(object: ValueEventListener{
+
+                                override fun onDataChange(dataSnapshot2: DataSnapshot) {
+                                    if(dataSnapshot2!!.exists()) {
+                                        for (j in dataSnapshot2.children) {
+                                            if(j.key == id){
+                                                setFav == true
+                                            }
+                                        }
+                                    }
+
+
+                                }
+
+
+                                override fun onCancelled(databaseError2: DatabaseError) {}
+                            }
+                            )
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        myRef.addValueEventListener(postListener)
 
     //Set resources on page
         resName.text = name
