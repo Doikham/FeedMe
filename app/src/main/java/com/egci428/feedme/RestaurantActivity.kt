@@ -268,4 +268,8 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     fun delFavorite(id: String) {
         val info = myRef.child(user!!.uid).child(id).setValue(null)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 }

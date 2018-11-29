@@ -10,9 +10,9 @@ object DataproviderFav {
         return data
     }
 
-    fun addData(name: String, address: String, id: String, phonenumber: String, pricelevel: Int, rating: Float, lat: Double,long: Double){
+    fun addData(name: String, address: String, id: String, phonenumber: String, pricelevel: Int, rating: Float, lat: Double,long: Double,mGeoDataClient: GeoDataClient){
 
-        data.add(Favourite(name,address,id,phonenumber, pricelevel, rating, lat, long))
+        data.add(Favourite(name,address,id,phonenumber, pricelevel, rating, lat, long,mGeoDataClient))
     }
 
     fun clearData(){
