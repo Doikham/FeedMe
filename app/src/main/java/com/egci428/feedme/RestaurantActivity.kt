@@ -2,6 +2,7 @@ package com.egci428.feedme
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -21,6 +22,8 @@ import android.net.Uri
 import com.google.android.gms.location.places.PlacePhotoResponse
 import com.google.android.gms.tasks.Task
 import android.support.annotation.NonNull
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
@@ -81,9 +84,23 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val id = intent.getStringExtra("rid")
 
         callBtn.setOnClickListener {
-            val intent = Intent(Intent.ACTION_CALL)
-            intent.data = Uri.parse("tel:$phone")
-            startActivity(intent)
+
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted
+
+                //Toast.makeText(this, "Please enable location services in order to continue",Toast.LENGTH_SHORT).show()
+                val permissions = arrayOf(android.Manifest.permission.CALL_PHONE)
+                ActivityCompat.requestPermissions(this, permissions,0)
+
+                recreate()
+
+            }
+            else {
+                val intent = Intent(Intent.ACTION_CALL)
+                intent.data = Uri.parse("tel:$phone")
+                startActivity(intent)
+            }
         }
 
         val postListener = object : ValueEventListener {
@@ -132,14 +149,6 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         myRef.addValueEventListener(postListener)
 
-
-//        if(setFav == true)
-//        {
-//            favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
-//        }
-//        else{
-//            favButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
-//        }
 
         favButton.setOnClickListener {
             Log.d("kkkkk","OUT")
