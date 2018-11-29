@@ -71,6 +71,12 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
         lastUpdate = System.currentTimeMillis()
 
+        refreshBtn.visibility = View.VISIBLE
+
+        refreshBtn.setOnClickListener {
+            recreate()
+        }
+
         var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
             val postListener = object : ValueEventListener {
@@ -120,16 +126,23 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
 
 
-        data = DataproviderFav.getData()
-        val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
-        listr.adapter = restaurantArrayAdapter
+            data = DataproviderFav.getData()
 
-        listr.setOnItemClickListener { adapterView, view, position, _ ->
-            val restaurant = data!!.get(position)
-            Log.d("supyo","$position")
-            displayDetail(restaurant)
+                val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
+                listr.adapter = restaurantArrayAdapter
 
-        }
+                listr.setOnItemClickListener { adapterView, view, position, _ ->
+                    val restaurant = data!!.get(position)
+                    Log.d("supyo", "$position")
+                    displayDetail(restaurant)
+
+                }
+
+
+
+
+
+
 
     }
 
