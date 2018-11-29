@@ -239,7 +239,6 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
                 return
             }
 
-            // TODO: Here
 
             if(gone == false) {
 
