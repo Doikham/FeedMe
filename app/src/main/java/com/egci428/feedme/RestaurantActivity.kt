@@ -46,7 +46,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
     val user = FirebaseAuth.getInstance().currentUser
     //need to set to false
-    var setFav: Boolean? = null
+    var setFav: Boolean = false
     var database = FirebaseDatabase.getInstance()
     var myRef = database.getReference()
 
@@ -67,18 +67,6 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Construct a PlaceDetectionClient.
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
-
-        favButton.setOnClickListener {
-            if (setFav == true){
-                favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
-                setFav = false
-            }
-            if (setFav == false){
-                favButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
-                setFav = true
-            }
-            Log.d("kkkkk",setFav.toString())
-        }
 
 
 
@@ -106,12 +94,15 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
                                         for (j in dataSnapshot2.children) {
                                             if(j.key == id){
                                                 setFav = true
+                                                favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
                                                 Log.d("kkkkk","Favorite de")
+
 
                                                 break
                                             }
                                             else{
                                                 setFav = false
+                                                Log.d("kkkkk","TestF")
                                             }
                                         }
                                     }
@@ -134,6 +125,34 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         myRef.addValueEventListener(postListener)
 
+
+//        if(setFav == true)
+//        {
+//            favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
+//        }
+//        else{
+//            favButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
+//        }
+
+        favButton.setOnClickListener {
+            Log.d("kkkkk","OUT")
+            if (setFav == true){
+                setFav = false
+                favButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
+                delFavorite(id)
+                Log.d("kkkkk","TestF")
+            }
+            else if (setFav == false){
+
+                setFav = true
+                setFavorite(name,address,id,phone,price,rating,lat,long)
+                favButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
+                Log.d("kkkkk","Test")
+            }
+            Log.d("kkkkk",setFav.toString())
+        }
+
+
     //Set resources on page
         resName.text = name
         resAdd.text = address
@@ -143,10 +162,6 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         resLat.text = lat.toString()
         resLong.text = long.toString()
 
-//        if(setFav == true)
-//        {
-//            setFavorite(name,address,id,phone,price,rating,lat,long)
-//        }
 
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -236,9 +251,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
-    fun delFavorite(id: String){
-        val uid = user!!.uid
-        myRef.child(uid).child(id).removeValue()
+    fun delFavorite(id: String) {
+        val info = myRef.child(user!!.uid).child(id).setValue(null)
     }
-
 }
