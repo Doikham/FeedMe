@@ -19,6 +19,8 @@ import android.location.LocationManager
 import com.google.android.gms.location.places.PlacePhotoResponse
 import com.google.android.gms.tasks.Task
 import android.support.annotation.NonNull
+import android.support.v7.app.ActionBar
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.location.places.ui.PlacePicker.getAttributions
@@ -51,7 +53,13 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val toolbar: Toolbar = findViewById(R.id.tbRes)
+        setSupportActionBar(toolbar)
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         Log.d("kkkkk","Started")
 
