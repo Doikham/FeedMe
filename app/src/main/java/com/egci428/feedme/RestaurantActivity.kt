@@ -46,7 +46,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
     val user = FirebaseAuth.getInstance().currentUser
     //need to set to false
-    var setFav = false
+    var setFav: Boolean? = null
     var database = FirebaseDatabase.getInstance()
     var myRef = database.getReference()
 
@@ -69,9 +69,13 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
         favButton.setOnClickListener {
-            if (setFav){
-                
+            if (setFav == true){
+                setFav = false
             }
+            if(setFav == false){
+                setFav = true
+            }
+            Log.d("kkkkk",setFav.toString())
         }
 
 
@@ -99,16 +103,19 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
                                     if(dataSnapshot2!!.exists()) {
                                         for (j in dataSnapshot2.children) {
                                             if(j.key == id){
-                                                setFav == true
+                                                setFav = true
                                                 Log.d("kkkkk","Favorite de")
+
+                                                break
+                                            }
+                                            else{
+                                                setFav = false
                                             }
                                         }
                                     }
 
 
                                 }
-
-
                                 override fun onCancelled(databaseError2: DatabaseError) {}
                             }
                             )
@@ -134,10 +141,10 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         resLat.text = lat.toString()
         resLong.text = long.toString()
 
-        if(setFav == true)
-        {
-            setFavorite(name,address,id,phone,price,rating,lat,long)
-        }
+//        if(setFav == true)
+//        {
+//            setFavorite(name,address,id,phone,price,rating,lat,long)
+//        }
 
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
