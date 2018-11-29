@@ -1,11 +1,8 @@
 package com.egci428.feedme
 
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.d
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.squareup.picasso.Picasso
@@ -41,7 +38,7 @@ class InfoActivity : AppCompatActivity() {
             editTel.setText(telephone)
             //profileImg.setImageURI(photoUrl)
 
-            Picasso.with(this).load(photoUrl).into(profileImg)
+            Picasso.with(this).load(photoUrl).into(logoImg)
         }
 
         saveBtn.setOnClickListener {

@@ -110,7 +110,6 @@ class HomeActivity : AppCompatActivity()  {
                 R.id.settingDraw -> {
                     val intent = Intent(this, SettingActivity::class.java)
                     startActivity(intent)
-                    finish()
                 }
             }
             // close drawer when item is tapped
