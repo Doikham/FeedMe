@@ -7,16 +7,17 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/resListImg"
+        android:id="@+id/favimg"
         android:layout_width="76dp"
         android:layout_height="75dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="11dp" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/ResListName"
+        android:id="@+id/favname"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginEnd="8dp"
@@ -24,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:text="Restaurant Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/resListImg"
+        app:layout_constraintStart_toEndOf="@+id/favimg"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
