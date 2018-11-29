@@ -31,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -40,9 +41,11 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     private var locationManager: LocationManager? = null
     private var listener: LocationListener? = null
 
+    val user = FirebaseAuth.getInstance().currentUser
+    //need to set to false
     var setFav = false
     var database = FirebaseDatabase.getInstance()
-    var myRef = database.getReference("message")
+    var myRef = database.getReference("Favorite")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,34 +53,39 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_restaurant)
         //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        Log.d("kkkkk","Started")
+
         var mGeoDataClient2 = Places.getGeoDataClient(this,null) as GeoDataClient
 
         // Construct a PlaceDetectionClient.
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
 
+
+
         val name = intent.getStringExtra("rname")
-        resName.text = name
-
         val address = intent.getStringExtra("raddress")
-        resAdd.text = address
-
         val phone = intent.getStringExtra("rphonenumber")
-        resPhone.text = phone
-
         val price = intent.getIntExtra("rpricelevel",0)
-        resPrice.text = price.toString()
-
         val rating = intent.getFloatExtra("rrating",0.0F)
-        resRating.text = rating.toString()
-
         val lat = intent.getDoubleExtra("rlat",0.0)
-        resLat.text = lat.toString()
-        Log.d("lattt",lat.toString())
-
         val long = intent.getDoubleExtra("rlong",0.0)
+        val id = intent.getStringExtra("rid")
+
+    //Set resources on page
+        resName.text = name
+        resAdd.text = address
+        resPhone.text = phone
+        resPrice.text = price.toString()
+        resRating.text = rating.toString()
+        resLat.text = lat.toString()
         resLong.text = long.toString()
-        Log.d("lattt",long.toString())
+
+        if(setFav == true)
+        {
+            setFavorite(name,address,id,phone,price,rating,lat,long)
+        }
+
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -108,7 +116,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(markerOptions)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
         }
-        val id = intent.getStringExtra("rid")
+
         /*val img = intent.getIntExtra("rimg", 0)
         resImg.setImageResource(img)*/
         getPhotos(id, mGeoDataClient2)
@@ -156,7 +164,14 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    fun setFavorite(id: String){
+    fun setFavorite(name: String,address: String,id: String,phone: String, price: Int, rating: Float, lat: Double, long: Double){
+
+        val uid = user!!.uid
+        Log.d("kkkkk",uid)
+        val restaurant = RestaurantDB(name,address,id,phone,price,rating,lat,long)
+
+        myRef.child(uid).child(id).setValue(restaurant)
+
 
     }
 }

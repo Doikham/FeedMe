@@ -18,7 +18,7 @@ class InfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
 
-        auth = FirebaseAuth.getInstance()
+               auth = FirebaseAuth.getInstance()
 
         val user = auth.currentUser
         user?.let {
