@@ -168,15 +168,43 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.d("kkkkk",setFav.toString())
         }
 
+        val labelres = ("Restaurant Name: ")
+        val labeladd = ("Address: ")
+        val labelphone = ("Phone Number: ")
+        val labelprice = ("Price level: ")
+        val labelrat = ("Rating: ")
+        val noinfo = ("No information")
 
-    //Set resources on page
-        resName.text = name
-        resAdd.text = address
-        resPhone.text = phone
-        resPrice.text = price.toString()
-        resRating.text = rating.toString()
+        //Set resources on page
+        if(name.toInt() == -1){
+            resName.text = labelres+noinfo
+        } else{
+            resName.text = labelres+name
+        }
 
+        if(address.toInt() == -1){
+            resAdd.text = labeladd+noinfo
+        } else{
+            resAdd.text = labeladd+address
+        }
 
+        if(phone.toInt() == -1){
+            resPhone.text = labelphone+noinfo
+        } else{
+            resPhone.text = labelphone+phone
+        }
+
+        if(price == -1){
+            resPrice.text = labelprice+noinfo
+        } else{
+            resPrice.text = labelprice+price.toString()
+        }
+
+        if(rating.toInt() == -1){
+            resRating.text = labelrat+noinfo
+        } else{
+            resRating.text = labelrat+rating.toString()
+        }
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
