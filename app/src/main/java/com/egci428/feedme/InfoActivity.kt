@@ -38,7 +38,7 @@ class InfoActivity : AppCompatActivity() {
             editTel.setText(telephone)
             //profileImg.setImageURI(photoUrl)
 
-            Picasso.with(this).load(photoUrl).into(logoImg)
+            Picasso.with(this).load(photoUrl).into(userImgInfo)
         }
 
         saveBtn.setOnClickListener {

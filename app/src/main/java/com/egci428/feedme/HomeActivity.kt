@@ -92,7 +92,7 @@ class HomeActivity : AppCompatActivity()  {
         val hView =  navigationView.inflateHeaderView(R.layout.nav_header)
         //val uimg:ImageView = hView.findViewById(R.id.userImgNav)
         val uuser:TextView = hView.findViewById(R.id.usernameNav)
-        Picasso.with(this).load(user!!.photoUrl).into(userImgNav)
+        //Picasso.with(this).load(user!!.photoUrl).into(userImgNav)
         uuser.text = user!!.displayName
         
         navigationView.setNavigationItemSelectedListener { menuItem ->

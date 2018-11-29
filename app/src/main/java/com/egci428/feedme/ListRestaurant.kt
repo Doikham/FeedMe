@@ -89,21 +89,21 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
                             Log.d("supyo","Geo added successfully")
                         }
                     }
-//                    2 -> for (placeLikelihood in likelyPlaces) {
-//                        if (placeLikelihood.place.placeTypes.contains(cafenum)) {
-//                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng)
-//                        }
-//                    }
-//                    3 -> for (placeLikelihood in likelyPlaces) {
-//                        if (placeLikelihood.place.placeTypes.contains(delnum)) {
-//                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
-//                        }
-//                    }
-//                    4 -> for (placeLikelihood in likelyPlaces) {
-//                        if (placeLikelihood.place.placeTypes.contains(tanum)) {
-//                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng)
-//                        }
-//                    }
+                    2 -> for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(cafenum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id,placeLikelihood.place.phoneNumber.toString(),placeLikelihood.place.priceLevel,placeLikelihood.place.rating,placeLikelihood.place.latLng,mGeoDataClient)
+                        }
+                    }
+                    3 -> for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(delnum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng,mGeoDataClient)
+                        }
+                    }
+                    4 -> for (placeLikelihood in likelyPlaces) {
+                        if (placeLikelihood.place.placeTypes.contains(tanum)) {
+                            Dataprovider.addData(placeLikelihood.place.name.toString(),placeLikelihood.place.address.toString(),placeLikelihood.place.id, placeLikelihood.place.phoneNumber.toString(), placeLikelihood.place.priceLevel, placeLikelihood.place.rating, placeLikelihood.place.latLng,mGeoDataClient)
+                        }
+                    }
                 }
                 likelyPlaces.release()
 

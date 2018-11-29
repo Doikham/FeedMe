@@ -45,7 +45,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     //need to set to false
     var setFav = false
     var database = FirebaseDatabase.getInstance()
-    var myRef = database.getReference("Favorite")
+    var myRef = database.getReference()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
