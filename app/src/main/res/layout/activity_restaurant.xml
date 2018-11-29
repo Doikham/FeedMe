@@ -91,26 +91,6 @@
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/resLat"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Lat"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/resLong"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Lang"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
             <Button
                 android:id="@+id/showBtn"
                 android:layout_width="230dp"

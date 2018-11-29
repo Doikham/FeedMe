@@ -66,7 +66,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
 
-        // TODO: Start using the Places API.
+
 
         // restaurant is 79
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)

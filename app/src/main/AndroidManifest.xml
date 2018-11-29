@@ -47,17 +47,17 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".ListRestaurant" />
-        <activity android:name=".ListNear" />
         <activity android:name=".RestaurantActivity" />
-        <activity android:name=".ItemActivity" />
+
         <activity
             android:name=".PasscodeViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".PlacesActivity" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".FavActivity"></activity>
+        <activity android:name=".FavActivity">
+            android:screenOrientation="portrait" />
+        </activity>
     </application>
 
 </manifest>

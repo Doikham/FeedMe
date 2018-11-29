@@ -111,6 +111,10 @@ class HomeActivity : AppCompatActivity()  {
                     val intent = Intent(this, SettingActivity::class.java)
                     startActivity(intent)
                 }
+                R.id.favDraw -> {
+                    val intent = Intent(this, FavActivity::class.java)
+                    startActivity(intent)
+                }
             }
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()
@@ -154,6 +158,7 @@ class HomeActivity : AppCompatActivity()  {
             }
 
     }
+
 
 
 

@@ -175,8 +175,6 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         resPhone.text = phone
         resPrice.text = price.toString()
         resRating.text = rating.toString()
-        resLat.text = lat.toString()
-        resLong.text = long.toString()
 
 
 
