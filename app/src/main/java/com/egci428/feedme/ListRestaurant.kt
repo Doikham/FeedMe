@@ -47,12 +47,10 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
 
-        val toolbar: Toolbar = findViewById(R.id.tbListRes)
-        setSupportActionBar(toolbar)
-        val actionbar: ActionBar? = supportActionBar
-        actionbar?.apply {
-            setDisplayHomeAsUpEnabled(true)
+        tbListRes.setNavigationOnClickListener{
+            finish()
         }
+        tbListRes.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -279,5 +277,6 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         super.onPause()
         sensorManager!!.unregisterListener(this)
     }
+
 }
 

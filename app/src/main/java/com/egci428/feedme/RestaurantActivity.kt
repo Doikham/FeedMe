@@ -1,6 +1,7 @@
 package com.egci428.feedme
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -55,12 +56,10 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
 
-        val toolbar: Toolbar = findViewById(R.id.tbRes)
-        setSupportActionBar(toolbar)
-        val actionbar: ActionBar? = supportActionBar
-        actionbar?.apply {
-            setDisplayHomeAsUpEnabled(true)
+        tbRes.setNavigationOnClickListener{
+            finish()
         }
+        tbRes.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
 
         Log.d("kkkkk","Started")
 
@@ -224,4 +223,5 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
+
 }

@@ -1,10 +1,12 @@
 package com.egci428.feedme
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.squareup.picasso.Picasso
@@ -18,12 +20,16 @@ class InfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
 
-        val toolbar: Toolbar = findViewById(R.id.tbInfo)
-        setSupportActionBar(toolbar)
+        tbInfo.setNavigationOnClickListener{
+            finish()
+        }
+        tbInfo.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
+
+        /*setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
-        }
+        }*/
 
         auth = FirebaseAuth.getInstance()
 
@@ -64,7 +70,6 @@ class InfoActivity : AppCompatActivity() {
 
         }
 
-
-
     }
+
 }
