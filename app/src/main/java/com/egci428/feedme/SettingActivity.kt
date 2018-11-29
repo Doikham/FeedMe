@@ -22,10 +22,21 @@ class SettingActivity : AppCompatActivity() {
 
         setpasscodeBtn.isClickable = false
 
+        val isSet = SharedPreference(this).getPasswordEnabled()
+
+        if(isSet == true)
+        {
+            passcodeswitch.isChecked = true
+            setpasscodeBtn.visibility = View.VISIBLE
+            setpasscodeBtn.isClickable = true
+        }
+
         passcodeswitch.setOnClickListener {
             if(passcodeswitch.isChecked == true){
                 setpasscodeBtn.visibility = View.VISIBLE
                 setpasscodeBtn.isClickable = true
+                val intent = Intent(this,SetPasscodeActivity::class.java)
+                startActivity(intent)
             }
             else if(passcodeswitch.isChecked == false)
             {

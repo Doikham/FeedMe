@@ -150,7 +150,11 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+            else{
+                updateUI(currentUser)
             }
+        }
+
         }
 
 
