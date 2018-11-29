@@ -68,7 +68,9 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         // Construct a PlaceDetectionClient.
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
+        favButton.setOnClickListener {
 
+        }
 
 
 
@@ -80,7 +82,6 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val lat = intent.getDoubleExtra("rlat",0.0)
         val long = intent.getDoubleExtra("rlong",0.0)
         val id = intent.getStringExtra("rid")
-
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
