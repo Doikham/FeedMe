@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="303dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -25,12 +25,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbSetting">
+        app:layout_constraintTop_toBottomOf="@+id/tbSetting"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/logoImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -39,15 +40,22 @@
             android:cropToPadding="false"
             app:srcCompat="@drawable/ic_logo_circle" />
 
+        <Switch
+            android:id="@+id/passcodeswitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Turn Passcode On" />
+
         <Button
-            android:id="@+id/editInfo"
+            android:id="@+id/setpasscodeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="30dp"
-            android:text="Edit Info"
+            android:text="Set Passcode"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoImg" />
@@ -60,10 +68,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="30dp"
-            android:text="Clear Favourite"
+            android:text="Clear Favourites"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/setpasscodeBtn" />
 
         <TextView
             android:id="@+id/devNote"

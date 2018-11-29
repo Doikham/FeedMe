@@ -168,43 +168,36 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.d("kkkkk",setFav.toString())
         }
 
-        val labelres = ("Restaurant Name: ")
-        val labeladd = ("Address: ")
-        val labelphone = ("Phone Number: ")
-        val labelprice = ("Price level: ")
-        val labelrat = ("Rating: ")
-        val noinfo = ("No information")
 
-        //Set resources on page
-        if(name.toInt() == -1){
-            resName.text = labelres+noinfo
-        } else{
-            resName.text = labelres+name
+    //Set resources on page
+        resName.text = "Name: $name"
+        resAdd.text = "Address: $address"
+        resPhone.text = "Phone: $phone"
+
+        if(price == -1)
+        {
+            resPrice.text = "Price: No information"
+        }
+        else if(price == 1)
+        {
+            resPrice.text = "Price: Cheap"
+        }
+        else if(price == 2)
+        {
+            resPrice.text = "Price: Moderate"
+        }
+        else if(price == 3)
+        {
+            resPrice.text = "Price: Expensive"
+        }
+        else if(price == 4)
+        {
+            resPrice.text = "Price: Very Expensive"
         }
 
-        if(address.toInt() == -1){
-            resAdd.text = labeladd+noinfo
-        } else{
-            resAdd.text = labeladd+address
-        }
+        resRating.text = "Rating: ${rating.toString()}"
 
-        if(phone.toInt() == -1){
-            resPhone.text = labelphone+noinfo
-        } else{
-            resPhone.text = labelphone+phone
-        }
 
-        if(price == -1){
-            resPrice.text = labelprice+noinfo
-        } else{
-            resPrice.text = labelprice+price.toString()
-        }
-
-        if(rating.toInt() == -1){
-            resRating.text = labelrat+noinfo
-        } else{
-            resRating.text = labelrat+rating.toString()
-        }
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 

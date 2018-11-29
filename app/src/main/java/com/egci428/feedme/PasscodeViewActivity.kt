@@ -21,8 +21,10 @@ class PasscodeViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_passcode_view)
 
+        val passcode = SharedPreference(this).getPinValue()
+
         passcodeView
-                .setLocalPasscode("5555")
+                .setLocalPasscode(passcode)
                 .setListener(passcodeListener)
                 .wrongInputTip = "  $count times remaining. App will automatically sign out after $count tries"
 
@@ -42,13 +44,7 @@ class PasscodeViewActivity : AppCompatActivity() {
         }
 
         override fun onFail() {
-            if (count == 0) {
 
-                FirebaseAuth.getInstance().signOut()
-            }
-            else {
-                count.dec()
-            }
         }
     }
 

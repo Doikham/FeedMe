@@ -3,11 +3,9 @@ package com.egci428.feedme
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.ActionBar
-import android.support.v7.widget.Toolbar
-import android.widget.Switch
-import com.egci428.feedme.R.id.tbSetting
-import com.egci428.feedme.R.id.toggle
+import android.view.View
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
@@ -21,13 +19,36 @@ class SettingActivity : AppCompatActivity() {
         }
         tbSetting.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
 
-        editInfo.setOnClickListener {
-            val intent = Intent(this,InfoActivity::class.java)
+
+        setpasscodeBtn.isClickable = false
+
+        passcodeswitch.setOnClickListener {
+            if(passcodeswitch.isChecked == true){
+                setpasscodeBtn.visibility = View.VISIBLE
+                setpasscodeBtn.isClickable = true
+            }
+            else if(passcodeswitch.isChecked == false)
+            {
+                setpasscodeBtn.visibility = View.INVISIBLE
+                setpasscodeBtn.isClickable = false
+
+                SharedPreference(this).setPasswordEnabled(false)
+                SharedPreference(this).setPinValue("")
+            }
+        }
+
+        setpasscodeBtn.setOnClickListener {
+            val intent = Intent(this,SetPasscodeActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
 
         clearFav.setOnClickListener{
+            val user = FirebaseAuth.getInstance().currentUser
+            var database = FirebaseDatabase.getInstance()
+            var myRef = database.getReference()
+
+            myRef.child(user!!.uid).setValue(null)
 
         }
 

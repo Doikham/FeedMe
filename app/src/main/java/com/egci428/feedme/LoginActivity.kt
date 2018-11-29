@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import android.content.Intent
 import android.nfc.Tag
 import android.os.SystemClock.sleep
+import android.provider.ContactsContract
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DialogTitle
@@ -142,10 +143,13 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         //Need to change if condition to check if setting for fingerprint scanner is true
+        val isSet = SharedPreference(this@LoginActivity).getPasswordEnabled()
         if(currentUser != null) {
-            val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(isSet == true) {
+                val intent = Intent(this@LoginActivity, PasscodeViewActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             }
         }
 
