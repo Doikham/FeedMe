@@ -69,7 +69,9 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
         favButton.setOnClickListener {
-
+            if (setFav){
+                
+            }
         }
 
 
