@@ -16,6 +16,7 @@ import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.Uri
 //import android.support.test.orchestrator.junit.BundleJUnitUtils.getResult
 import com.google.android.gms.location.places.PlacePhotoResponse
 import com.google.android.gms.tasks.Task
@@ -78,6 +79,12 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val lat = intent.getDoubleExtra("rlat",0.0)
         val long = intent.getDoubleExtra("rlong",0.0)
         val id = intent.getStringExtra("rid")
+
+        callBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$phone")
+            startActivity(intent)
+        }
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
