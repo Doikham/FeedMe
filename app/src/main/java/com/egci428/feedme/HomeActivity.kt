@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_info.*
+import kotlinx.android.synthetic.main.nav_header.*
 
 class HomeActivity : AppCompatActivity()  {
 
@@ -89,22 +90,27 @@ class HomeActivity : AppCompatActivity()  {
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val hView =  navigationView.inflateHeaderView(R.layout.nav_header)
-        val uimg:ImageView = hView.findViewById(R.id.userImgNav)
+        //val uimg:ImageView = hView.findViewById(R.id.userImgNav)
         val uuser:TextView = hView.findViewById(R.id.usernameNav)
-        uimg.setImageURI(user!!.photoUrl)
+        Picasso.with(this).load(user!!.photoUrl).into(userImgNav)
         uuser.text = user!!.displayName
+        
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             when(menuItem.itemId){
                 R.id.logoutDraw -> {
                     auth.signOut()
                     val user = auth.currentUser
-                    if(user == null){
-                        val intent = Intent(this,LoginActivity::class.java)
+                    if (user == null) {
+                        val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
-
+                }
+                R.id.settingDraw -> {
+                    val intent = Intent(this, SettingActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
             // close drawer when item is tapped
