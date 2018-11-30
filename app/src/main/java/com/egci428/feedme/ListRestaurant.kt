@@ -48,6 +48,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurant)
 
+                //Set toolbar properties
         tbListRes.setNavigationOnClickListener{
             Dataprovider.clearData()
             finish()
@@ -70,7 +71,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
 
 
-        // restaurant is 79
+        // Check if permission is allowed
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
@@ -83,12 +84,15 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
         }
         else {
+            //Int value for each category
             val restaurantnum = 79
             val cafenum = 15
             val delnum = 60
             val tanum = 61
             val placeResult = mPlaceDetectionClient.getCurrentPlace(null)
 
+
+            //Check category and add data to data provider
             placeResult.addOnCompleteListener { task ->
                 val likelyPlaces = task.result
                 when (choose) {
@@ -117,11 +121,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
                 likelyPlaces.release()
 
 
-                        //here
-                //put list here; data = list.getData()
-
-                //here
-                //put list here; data = list.getData()
+                //Custom adapter
                 data = Dataprovider.getData()
                 val restaurantArrayAdapter = RestaurantArrayAdapter(this,0, data!!)
                 listr.adapter = restaurantArrayAdapter
@@ -143,6 +143,8 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         }
 
     }
+
+    //Start Restaurant Activity and send data
 
     private fun displayDetail(restaurant: Restaurant){
         val intent = Intent(this,RestaurantActivity::class.java)
@@ -234,6 +236,8 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
         Dataprovider.clearData()
 
     }
+
+    //Accelerometer to random
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER){

@@ -14,6 +14,7 @@ class SetPasscodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_passcode)
 
+        //Set passcode
         passcodeView
                 .setListener(passcodeListener)
 
@@ -27,6 +28,7 @@ class SetPasscodeActivity : AppCompatActivity() {
         override fun onSuccess(number: String) {
             val passcode = passcodeView.localPasscode
 
+            //Use shared preference
             SharedPreference(this@SetPasscodeActivity).setPasswordEnabled(true)
             SharedPreference(this@SetPasscodeActivity).setPinValue(passcode)
 

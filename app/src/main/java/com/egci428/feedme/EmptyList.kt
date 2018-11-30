@@ -11,6 +11,7 @@ class EmptyList: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.empty_list)
 
+        //If nothing shown
         tbEmpty.setNavigationOnClickListener {
             finish()
         }

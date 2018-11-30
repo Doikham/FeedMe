@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
+    //Start sign in
         signInBtn.setSize(SignInButton.SIZE_STANDARD)
         signInBtn.setColorScheme(SignInButton.COLOR_AUTO)
         signInBtn.setOnClickListener {

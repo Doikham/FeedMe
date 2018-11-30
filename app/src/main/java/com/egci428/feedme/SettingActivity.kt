@@ -19,7 +19,7 @@ class SettingActivity : AppCompatActivity() {
         }
         tbSetting.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp)
 
-
+        //Check if passcode is set
         setpasscodeBtn.isClickable = false
 
         val isSet = SharedPreference(this).getPasswordEnabled()
@@ -53,6 +53,8 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
             //finish()
         }
+
+        //Clear all favorites
 
         clearFav.setOnClickListener{
             val user = FirebaseAuth.getInstance().currentUser

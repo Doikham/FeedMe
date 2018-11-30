@@ -80,6 +80,9 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
         var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
+        //Everything the same as ListRestaurant
+
+        //Read from DB and add to Dataprovider
             val postListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     // Get Post object and use the values to update the UI

@@ -55,7 +55,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
     var myRef = database.getReference()
 
 
-
+//Start Restaurant Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
@@ -73,7 +73,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         var mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null) as PlaceDetectionClient
 
 
-
+        //Get value from intent
         val name = intent.getStringExtra("rname")
         val address = intent.getStringExtra("raddress")
         val phone = intent.getStringExtra("rphonenumber")
@@ -83,6 +83,8 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         val long = intent.getDoubleExtra("rlong",0.0)
         val id = intent.getStringExtra("rid")
 
+
+    //Call functionality
         callBtn.setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
@@ -103,6 +105,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+    //Find in DB
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -150,6 +153,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
         myRef.addValueEventListener(postListener)
 
 
+        //Set or remove Favorite
         favButton.setOnClickListener {
             Log.d("kkkkk","OUT")
             if (setFav == true){
@@ -218,7 +222,7 @@ class RestaurantActivity : AppCompatActivity(), OnMapReadyCallback {
 
             }
         }
-
+        //Set up Map
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
