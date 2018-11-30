@@ -40,6 +40,7 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
     private var lastUpdate: Long = 0
     private var color = false
     var gone: Boolean = false
+    var exist: Boolean = false
 
 
 
@@ -130,6 +131,11 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
                     Log.d("supyo","$position")
                     displayDetail(restaurant)
 
+                }
+
+                if(restaurantArrayAdapter.count != 0) {
+                    exist = true
+                    Log.d("kkkkk","exist")
                 }
 
             }
@@ -252,13 +258,18 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
             if(gone == false) {
 
-                val size = RestaurantArrayAdapter(this, 0, data!!).count
-                val nextInt = Random().nextInt(size)
-                val restaurant = data!!.get(nextInt)
-                displayDetail(restaurant)
-                Log.d("supyo", "Activity Launched $count")
-                //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
-                gone = true
+                Log.d("kkkkk","Inside")
+
+                if(exist == true){
+                    val size = RestaurantArrayAdapter(this, 0, data!!).count
+                    val nextInt = Random().nextInt(size)
+                    val restaurant = data!!.get(nextInt)
+                    displayDetail(restaurant)
+                    Log.d("supyo", "Activity Launched $count")
+                    //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
+                    gone = true
+                }
+
             }
 
 

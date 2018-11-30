@@ -51,6 +51,7 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
     val user = FirebaseAuth.getInstance().currentUser
     var database = FirebaseDatabase.getInstance()
     var myRef = database.getReference()
+    var exist: Boolean = false
 
 
 
@@ -137,6 +138,11 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
                     displayDetail(restaurant)
 
                 }
+
+            if(restaurantArrayAdapter.count != 0) {
+                exist = true
+                Log.d("kkkkk","exist")
+            }
 
 
 
@@ -261,17 +267,22 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
             if(gone == false) {
 
-                val size = RestaurantArrayAdapter(this, 0, data!!).count
-                val nextInt = Random().nextInt(size)
-                val restaurant = data!!.get(nextInt)
-                displayDetail(restaurant)
-                Log.d("supyo", "Activity Launched $count")
-                //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
-                gone = true
+                Log.d("kkkkk", "Inside")
+
+                if (exist == true) {
+                    val size = RestaurantArrayAdapter(this, 0, data!!).count
+                    val nextInt = Random().nextInt(size)
+                    val restaurant = data!!.get(nextInt)
+                    displayDetail(restaurant)
+                    Log.d("supyo", "Activity Launched $count")
+                    //Toast.makeText(this, "Shake de + $size + $nextInt", Toast.LENGTH_SHORT).show()
+                    gone = true
+                }
             }
 
 
-        }
+
+            }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
