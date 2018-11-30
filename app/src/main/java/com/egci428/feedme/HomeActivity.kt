@@ -53,11 +53,12 @@ class HomeActivity : AppCompatActivity()  {
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_menu)
-            //setLogo(R.drawable.ic_logo_circle)
+            //create menu in action bar
         }
 
         val userHelp: String = ("Choose the category below to start searching for nearby restaurant")
         userMsg.text = userHelp
+        //set text message
 
         Restaurant.setOnClickListener {
             val intent = Intent(this, ListRestaurant::class.java )
@@ -86,6 +87,8 @@ class HomeActivity : AppCompatActivity()  {
             startActivity(intent)
 
         }
+
+        //set function for each category
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
