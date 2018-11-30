@@ -135,7 +135,11 @@ class ListRestaurant : AppCompatActivity(), SensorEventListener {
 
                 if(restaurantArrayAdapter.count != 0) {
                     exist = true
-                    Log.d("kkkkk","exist")
+
+                }else{
+                    val intent = Intent(this,EmptyList::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
             }
