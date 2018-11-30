@@ -28,7 +28,7 @@
         <ListView
             android:id="@+id/listr"
             android:layout_width="match_parent"
-            android:layout_height="525dp"
+            android:layout_height="485dp"
             android:layout_marginTop="0dp"
             tools:layout_editor_absoluteX="0dp" />
     </LinearLayout>

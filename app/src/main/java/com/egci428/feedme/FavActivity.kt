@@ -74,7 +74,9 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
         refreshBtn.visibility = View.VISIBLE
 
-
+        refreshBtn.setOnClickListener {
+            recreate()
+        }
 
         var mGeoDataClient = Places.getGeoDataClient(this,null) as GeoDataClient
 
@@ -139,17 +141,8 @@ class FavActivity : AppCompatActivity(),  SensorEventListener {
 
             if(restaurantArrayAdapter.count != 0) {
                 exist = true
-
+                Log.d("kkkkk","exist")
             }
-
-        refreshBtn.setOnClickListener {
-            if(restaurantArrayAdapter.count == 0){
-                val intent = Intent(this,EmptyList::class.java)
-                startActivity(intent)
-                finish()
-            }
-            recreate()
-        }
 
 
 
