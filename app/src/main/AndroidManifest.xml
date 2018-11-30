@@ -73,6 +73,9 @@
         <activity
             android:name=".SetPasscodeActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".EmptyList"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
